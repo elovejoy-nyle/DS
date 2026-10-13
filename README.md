@@ -9,6 +9,30 @@ setq a is equal to: var a = "stuff"
 maths seem to be postscript-esque
 (+(* 5 10)3) = 53
 
+# How to draftSight:
+1. with DraftSight Open, Go to the command line, and type:
+LOADAPPLICATION
+hit enter. A window will appear, and you then must go select the script you want to execute.
+<img src="HOW_TO_AUTOLISP.png"
+**DraftSight will not execute the script, at least as far as I know right now.**
+
+Then you will have access to the commands present in your AutoLISP program.
+
+```autolisp
+(defun c:HELLO ()
+  (princ "\nHello from AutoLISP!")
+  (princ)
+)
+
+(defun c:GOODBYE ()
+  (princ "\ngood-bye AutoLISP!")
+  (princ)
+)
+```
+The functions HELLO and GOODBYE are now present in the Command Line.
+
+
+
 # resources:
 <a href="https://help.solidworks.com/2024/english/api/draftsightlispreference/html/lisp_functions_alphabetically.htm">DraftSight Commands</a>  
 <a href="https://help.solidworks.com/2023/english/DraftSight/html/hlpid_file_macro.htm"> Writing draftsight scripts </a>  
