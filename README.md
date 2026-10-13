@@ -13,7 +13,7 @@ maths seem to be postscript-esque
 1. with DraftSight Open, Go to the command line, and type:
 LOADAPPLICATION
 hit enter. A window will appear, and you then must go select the script you want to execute.
-<img src="HOW_TO_AUTOLISP.png"
+<img src="HOW_TO_AUTOLISP.png">
 **DraftSight will not execute the script, at least as far as I know right now.**
 
 Then you will have access to the commands present in your AutoLISP program.
