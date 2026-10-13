@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+  <name>DraftSight AutoLISP</name>
+  <id>com.nyle.inkscape.output.draftsight_autolisp</id>
+  <dependency type="extension">org.inkscape.output.svg.inkscape</dependency>
+
+  <param name="curve_tolerance" type="float" min="0.001" max="10.0" precision="3"
+         gui-text="Curve tolerance (mm)"
+         gui-description="Curves are converted to native CAD polylines. Smaller values create more vertices.">0.05</param>
+  <param name="auto_run" type="bool"
+         gui-text="Draw automatically when LISP is loaded"
+         gui-description="If enabled, LOADAPPLICATION immediately creates the exported geometry.">true</param>
+
+  <output>
+    <extension>.lsp</extension>
+    <mimetype>text/plain</mimetype>
+    <filetypename>DraftSight AutoLISP (*.lsp)</filetypename>
+    <filetypetooltip>Export SVG artwork as native DraftSight geometry in an AutoLISP program</filetypetooltip>
+    <dataloss>true</dataloss>
+  </output>
+
+  <script>
+    <command location="inx" interpreter="python">draftsight_lisp_output.py</command>
+  </script>
+</inkscape-extension>
