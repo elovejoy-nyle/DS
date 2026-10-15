@@ -34,7 +34,7 @@
      <label><input type="radio" name="paper" value="a4">A4</label>
      <label><input type="radio" name="paper" value="custom">Custom</label>
     </fieldset>
-    <div class="two"><label>Orientation<select id="orientation"><option value="landscape">Landscape</option><option value="portrait">Portrait</option></select></label>
+    <div class="two"><label>Orientation<select id="orientation"><option value="portrait">Portrait</option><option value="landscape">Landscape</option></select></label>
     <label>Gap, edge to edge (mm)<input id="gap" type="number" min="0" max="5000" step="0.1" value="10"></label></div>
     <div class="three"><label>Width (mm)<input id="width" type="number" min="50" max="5000" step="0.1"></label><label>Height (mm)<input id="height" type="number" min="50" max="5000" step="0.1"></label><label>Margin (mm)<input id="margin" type="number" min="0" step="0.1"></label></div>
    </div>
@@ -115,6 +115,7 @@
   const text = x => String(x == null ? '' : x).replace(/[\r\n\t]/g, ' ').slice(0, 250);
   const presets = {letter:[215.9,279.4], legal:[215.9,355.6], a4:[210,297]};
   function entity(type, props) { return Object.assign({id:uid(), type}, props); }
+/*
   function defaults() {
     return [
       entity('rect',{x1:0,y1:0,x2:145,y2:40}),
@@ -131,10 +132,130 @@
       entity('text',{x:88,y:3.5,h:2.5,text:'Sheet {PAGE} of {PAGECOUNT}'})
     ];
   }
+*/
+// Match our existing template as defualt.
+function defaults() {
+  return [
+    // Outer boundary: 145 x 40 mm.
+    // Coordinates start at the title block's bottom-left corner.
+    entity('rect', {
+      x1: 0, y1: 0,
+      x2: 145, y2: 40
+    }),
+
+    // Horizontal row dividers.
+    entity('line', {x1: 0, y1: 28,   x2: 145, y2: 28}),
+    entity('line', {x1: 0, y1: 15.5, x2: 145, y2: 15.5}),
+    entity('line', {x1: 0, y1: 8,    x2: 145, y2: 8}),
+
+    // Main divider: production/drawing personnel on the left.
+    entity('line', {x1: 55, y1: 0, x2: 55, y2: 40}),
+
+    // DWG NUMBER / REV divider, in the third row only.
+    entity('line', {x1: 120, y1: 8, x2: 120, y2: 15.5}),
+
+    // SCALE / SHEET divider, in the bottom row only.
+    entity('line', {x1: 110, y1: 0, x2: 110, y2: 8}),
+
+    // Row 1: PRODUCTION START DATE | TITLE
+    entity('text', {
+      x: 1.5, y: 37.5, h: 1.8,
+      text: 'PRODUCTION START DATE'
+    }),
+    entity('text', {
+      x: 2, y: 31.5, h: 3,
+      text: '{PRODUCTION_START_DATE}'
+    }),
+    entity('text', {
+      x: 56.5, y: 37.5, h: 1.8,
+      text: 'TITLE'
+    }),
+    entity('text', {
+      x: 78, y: 31.5, h: 4,
+      text: '{TITLE}'
+    }),
+
+    // Row 2: PRODUCTION END DATE | MODEL
+    entity('text', {
+      x: 1.5, y: 25.5, h: 1.8,
+      text: 'PRODUCTION END DATE'
+    }),
+    entity('text', {
+      x: 2, y: 19, h: 3,
+      text: '{PRODUCTION_END_DATE}'
+    }),
+    entity('text', {
+      x: 56.5, y: 25.5, h: 1.8,
+      text: 'MODEL'
+    }),
+    entity('text', {
+      x: 74, y: 19, h: 4,
+      text: '{MODEL}'
+    }),
+
+    // Row 3: DRAWN BY | DWG NUMBER | REV
+    entity('text', {
+      x: 1.5, y: 13.1, h: 1.8,
+      text: 'DRAWN BY'
+    }),
+    entity('text', {
+      x: 2, y: 9.3, h: 2.8,
+      text: '{DRAWN_BY}'
+    }),
+    entity('text', {
+      x: 56.5, y: 13.1, h: 1.8,
+      text: 'DWG NUMBER'
+    }),
+    entity('text', {
+      x: 84, y: 9.3, h: 2.8,
+      text: '{DRAWING_NUMBER}'
+    }),
+    entity('text', {
+      x: 121.5, y: 13.1, h: 1.8,
+      text: 'REV'
+    }),
+    entity('text', {
+      x: 130, y: 9.3, h: 2.8,
+      text: '{REVISION}'
+    }),
+
+    // Row 4: CHECKED | SCALE | SHEET
+    entity('text', {
+      x: 1.5, y: 5.6, h: 1.8,
+      text: 'CHECKED'
+    }),
+    entity('text', {
+      x: 2, y: 1.6, h: 2.8,
+      text: '{CHECKED}'
+    }),
+    entity('text', {
+      x: 56.5, y: 5.6, h: 1.8,
+      text: 'SCALE'
+    }),
+    entity('text', {
+      x: 77, y: 1.6, h: 3,
+      text: '{SCALE}'
+    }),
+    entity('text', {
+      x: 111.5, y: 5.6, h: 1.8,
+      text: 'SHEET'
+    }),
+    entity('text', {
+      x: 118, y: 1.6, h: 3,
+      text: '{PAGE} OF {PAGECOUNT}'
+    })
+  ];
+}
   function newPage(n=1) { return {id:uid(),title:n===1?'UNTITLED':'PAGE '+n,number:'DWG-001',revision:'A',entities:[]}; }
   function newProject() {
     return {format:'DraftSightPageBuilder',version:2,units:'mm',coordinateSystem:'cad-y-up',
-      paper:{preset:'letter',orientation:'landscape',width:279.4,height:215.9},gap:10,margin:8,
+		paper: {
+		  preset: 'letter',
+		  orientation: 'portrait',
+		  width: 215.9,
+		  height: 279.4
+		},
+		  gap:10,margin:8,
       titleBlock:{enabled:true,width:145,height:40,entities:defaults()},pages:[newPage()]};
   }
   function sampleProject() {
@@ -203,10 +324,36 @@
     });
     return p;
   }
+	function vars(s, page, index, total) {
+	  const values = {
+		TITLE:                 page.title               ?? '',
+		DRAWING_NUMBER:        page.number              ?? '',
+		REVISION:              page.revision            ?? '',
+		PAGE:                  index + 1,
+		PAGECOUNT:             total,
+
+		PRODUCTION_START_DATE: page.productionStartDate ?? '',
+		PRODUCTION_END_DATE:   page.productionEndDate   ?? '',
+		MODEL:                 page.model               ?? '',
+		DRAWN_BY:              page.drawnBy             ?? '',
+		CHECKED:               page.checked             ?? '',
+		SCALE:                 page.scale               ?? 'NTS'
+	  };
+
+	  return text(s).replace(
+		/\{([A-Z_]+)\}/g,
+		(match, key) =>
+		  Object.prototype.hasOwnProperty.call(values, key)
+			? String(values[key])
+			: match
+	  );
+	}
+/*
   function vars(s,page,index,total) {
     const values={TITLE:page.title,DRAWING_NUMBER:page.number,REVISION:page.revision,PAGE:index+1,PAGECOUNT:total};
     return text(s).replace(/\{(TITLE|DRAWING_NUMBER|REVISION|PAGE|PAGECOUNT)\}/g,(_,key)=>String(values[key]));
   }
+*/  
   function origin(p,index) { return {x:num(index*(p.paper.width+p.gap)),y:0}; }
   function moved(e,dx,dy) {
     const r=clone(e);
