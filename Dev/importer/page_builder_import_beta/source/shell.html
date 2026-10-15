@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DraftSight Page Builder</title>
+<style>
+:root {font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:13px;color:#202936;background:#edf1f5;--accent:#1463bc;--border:#d6dde5;--muted:#637186;--ink:#1e2a39;--panel:#fff;}
+*{box-sizing:border-box}body{margin:0;height:100vh;display:flex;flex-direction:column}button,input,select{font:inherit}button{border:1px solid var(--border);background:white;color:var(--ink);padding:8px 11px;border-radius:6px;cursor:pointer;white-space:nowrap}button:hover{background:#edf4fb;border-color:#8daccd}button:disabled{opacity:.4;cursor:default}button.primary{background:var(--accent);border-color:var(--accent);color:#fff}button.primary:hover{background:#0b529f}button.danger{color:#a42d36}button.small{font-size:12px;padding:6px 8px}button.active{background:#e5f1ff;border-color:#91bae9;color:#0c54a2}button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:2px solid #2682df;outline-offset:2px}button.wide{width:100%;margin:4px 0 9px}input,select{width:100%;min-width:0;padding:7px 8px;border:1px solid var(--border);border-radius:5px;background:#fff;color:var(--ink)}input[type=checkbox],input[type=radio]{width:auto;accent-color:var(--accent)}input:disabled{background:#f1f4f7;color:var(--muted)}label{display:block;font-size:12px;color:#415167;margin-top:9px}label>input,label>select{display:block;margin-top:4px}.two{display:grid;grid-template-columns:1fr 1fr;gap:8px}.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}.check{display:flex;align-items:center;gap:6px;white-space:nowrap}.check input{margin:0}h1,h2,p{margin:0}h2{font-size:13px;font-weight:650}.hint{font-size:11px;line-height:1.5;color:var(--muted);margin-top:9px}main{display:grid;grid-template-columns:310px minmax(0,1fr);flex:1;min-height:0}.app-header{display:flex;justify-content:space-between;align-items:center;padding:12px 18px;background:#1d2938;color:#fff;gap:16px}.brand{display:flex;gap:11px;align-items:center}.brand-mark{background:#307bd2;color:#fff;font-weight:700;border-radius:8px;padding:10px;letter-spacing:-1px}.brand h1{font-size:17px;font-weight:650}.brand small{font-size:11px;background:#334458;border-radius:4px;margin-left:4px;padding:2px 5px;vertical-align:middle}.brand p{color:#aebdd0;font-size:11px;margin-top:3px}.header-actions{display:flex;gap:7px;flex-wrap:wrap}.header-actions button:not(.primary){background:#2b3b4f;color:#e9f1fc;border-color:#455972}.header-actions button:hover{background:#3d536c}.header-actions button.primary:hover{background:#1d78dd}#sidebar{overflow-y:auto;background:#fff;border-right:1px solid var(--border);padding:12px;scrollbar-width:thin}.side-section{padding:14px 0;border-bottom:1px solid #e5ebf1}.section-heading{display:flex;justify-content:space-between;align-items:center;margin-bottom:9px;gap:6px}.pill{font-size:10px;background:#edf2f8;color:#60718a;padding:2px 7px;border-radius:10px;margin-left:5px}details{border-bottom:1px solid #e5ebf1;padding:10px 0}summary{font-size:13px;font-weight:650;cursor:pointer}.details-body{padding-top:5px;padding-bottom:3px}.radios{display:flex;flex-wrap:wrap;gap:14px;border:0;padding:3px 0 0;margin:0}.radios label{display:flex;gap:3px;align-items:center;margin-top:6px}.radios input{display:inline;margin:0}.page-list{display:grid;gap:5px;max-height:132px;overflow-y:auto}.page-row{display:flex;align-items:center;gap:9px;text-align:left;width:100%;padding:7px 9px}.page-row .page-number{background:#eef2f7;border-radius:4px;padding:4px 6px;color:#526277;font-size:11px}.page-row.active .page-number{background:#cce1fc;color:#134f93}.page-row .page-name{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1;font-size:12px}.page-row small{font-size:10px;color:#60718a}.page-actions{display:flex;gap:4px;margin-top:7px}.page-actions button{font-size:10px;padding:5px 6px;flex:1}.workspace{display:flex;flex-direction:column;min-height:0;min-width:0}.view-row{display:flex;align-items:center;justify-content:space-between;padding:9px 12px;background:#fff;border-bottom:1px solid var(--border);gap:8px}.view-tabs,.view-controls{display:flex;gap:5px}.view-tabs button{border-color:transparent;font-size:12px;padding:7px 10px}.view-tabs button.active{background:#e8f2fe;border-color:#c4dbf7}.view-controls button{font-size:12px;padding:6px 9px}.tools{display:flex;align-items:center;gap:6px;padding:10px 12px;background:#fff;border-bottom:1px solid #e8edf3;flex-wrap:wrap}.tools button{padding:7px 11px;font-size:12px}.separator{width:1px;height:22px;background:#dbe3ec;margin:0 3px}.drawing-options{display:flex;align-items:center;gap:15px;padding:7px 13px;background:#f9fbfd}.drawing-options label{margin:0;font-size:11px}.inline{display:flex;align-items:center;gap:5px}.inline input{width:58px;margin:0;padding:3px 5px}.count{margin-left:auto;font-size:11px;color:#60718a}.text-options{display:flex;align-items:flex-end;gap:8px;padding:0 12px 8px;background:#f9fbfd}.text-options label:first-child{flex:1}.text-height{width:92px}.variables{width:180px}.tool-hint{padding:8px 13px;font-size:12px;background:#edf4fc;color:#315878;border-bottom:1px solid #d7e5f4;min-height:33px}.stage{position:relative;flex:1;min-height:240px;overflow:hidden;background:#dee5ed}#canvas{display:block;width:100%;height:100%;touch-action:none;user-select:none;outline:none}#canvas[data-tool=line],#canvas[data-tool=rect],#canvas[data-tool=circle],#canvas[data-tool=text]{cursor:crosshair}#canvas[data-tool=pan]{cursor:grab}#canvas[data-panning=true]{cursor:grabbing}.status-bar{display:flex;justify-content:space-between;gap:10px;padding:7px 12px;background:#fff;border-top:1px solid var(--border);font-size:10px;color:#5e6f85;min-height:28px}.toast{position:absolute;left:14px;bottom:14px;max-width:calc(100% - 28px);font-size:12px;line-height:1.4;background:#22374c;color:white;padding:10px 14px;border-radius:6px;box-shadow:0 3px 12px #12223422;pointer-events:none}.toast.error{background:#9b3038}#bootError{padding:10px;background:#fff2d3;border-bottom:1px solid #e3d2ac;font-size:12px}#geometryFields label{margin-top:7px}#inspector .section-heading h2{font-size:12px}.exports .two button{font-size:12px}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}[hidden]{display:none!important}
+@media(max-width:1100px){main{grid-template-columns:280px minmax(0,1fr)}.app-header{padding:9px 12px}.brand h1{font-size:14px}.brand p{font-size:10px}.header-actions{gap:4px}.header-actions button{font-size:11px;padding:7px 8px}.view-tabs button{font-size:11px;padding:7px}.view-row{padding:8px}.tools{padding:8px;gap:4px}.tools button{padding:7px 8px}.drawing-options{gap:9px}}
+@media(max-width:760px){body{height:auto;min-height:100vh}.app-header{align-items:flex-start;flex-direction:column;gap:9px}.header-actions{width:100%}.header-actions button{flex:1}main{display:flex;flex-direction:column-reverse}#sidebar{border-right:none;border-top:1px solid var(--border);overflow:visible}.workspace{height:72vh;min-height:520px}.view-row{flex-wrap:wrap}.stage{min-height:250px}.status-bar{font-size:9px}.variables{width:135px}.count{display:none}.text-options{flex-wrap:wrap}#sidebar .page-list{max-height:150px}}
+
+#cadImportDialog{max-width:980px;width:94vw;max-height:93vh;padding:20px;border:1px solid var(--border);border-radius:10px;color:var(--ink);overflow-y:auto}#cadImportDialog::backdrop{background:#162232a6}.cad-dialog-head,.cad-dialog-actions{display:flex;align-items:center;justify-content:space-between;gap:10px}.cad-dialog-actions{justify-content:flex-end;flex-wrap:wrap;margin-top:14px}.cad-notice{padding:12px;background:#fff4d8;border-left:3px solid #dbb455;line-height:1.55;margin:14px 0 8px}#cadStatus{padding:10px;margin:8px 0;background:#e8f2fb;line-height:1.5}#cadStatus.error{background:#fee9e9;color:#842530}#cadPreview{background:#fff;border:1px solid #dde4ed;min-height:30px;margin-top:12px}#cadPreview svg{display:block;width:100%}#cadDetails{font-size:11px;line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere;max-height:260px;overflow-y:auto;background:#f5f7fa;padding:10px}.cad-confirm{white-space:normal;line-height:1.5}#importReportBtn{font-size:11px}
+
+</style>
+</head>
+<body>
+<header class="app-header">
+  <div class="brand"><span class="brand-mark" aria-hidden="true">PB</span><div><h1>DraftSight Page Builder <small>0.3 import beta</small></h1><p>Draw here. Export text-based CAD pages.</p></div></div>
+  <div class="header-actions">
+    <button id="newBtn">New</button><button id="sampleBtn">Load sample</button>
+    <button id="saveBtn">Save project</button><button id="loadBtn">Open project</button>
+    <input id="loadInput" type="file" accept=".json,application/json" hidden>
+    <button id="importCadBtn">Import DWG / DXF</button><button id="dxfBtn" class="primary">Export DXF</button>
+  </div>
+</header>
+<div id="bootError" role="alert">Starting drawing engine. If this message stays visible, the app did not start.</div>
+<noscript>This application needs JavaScript enabled to draw and export.</noscript>
+<main>
+ <aside id="sidebar">
+  <details open><summary>Paper &amp; model spacing</summary>
+   <div class="details-body">
+    <fieldset class="radios"><legend class="sr-only">Paper size</legend>
+     <label><input type="radio" name="paper" value="letter" checked>Letter</label>
+     <label><input type="radio" name="paper" value="legal">Legal</label>
+     <label><input type="radio" name="paper" value="a4">A4</label>
+     <label><input type="radio" name="paper" value="custom">Custom</label>
+    </fieldset>
+    <div class="two"><label>Orientation<select id="orientation"><option value="portrait">Portrait</option><option value="landscape">Landscape</option></select></label>
+    <label>Gap, edge to edge (mm)<input id="gap" type="number" min="0" max="5000" step="0.1" value="10"></label></div>
+    <div class="three"><label>Width (mm)<input id="width" type="number" min="50" max="1000000" step="0.1"></label><label>Height (mm)<input id="height" type="number" min="50" max="1000000" step="0.1"></label><label>Margin (mm)<input id="margin" type="number" min="0" step="0.1"></label></div>
+   </div>
+  </details>
+  <section class="side-section">
+   <div class="section-heading"><h2>Pages <span id="pageCount" class="pill">1</span></h2><button id="addPageBtn" class="primary small">+ Add page</button></div>
+   <div id="pageList" class="page-list"></div>
+   <div class="page-actions"><button id="pageLeftBtn" title="Move selected page earlier">Move left</button><button id="pageRightBtn" title="Move selected page later">Move right</button><button id="duplicatePageBtn">Duplicate</button><button id="deletePageBtn" class="danger">Delete</button></div>
+   <label>Page title<input id="pageTitle" type="text" maxlength="100"></label>
+   <div class="two"><label>Drawing number<input id="drawingNumber" type="text" maxlength="80"></label><label>Revision<input id="revision" type="text" maxlength="20"></label></div>
+   <p class="hint">The title and Sheet X of N appear in the same model geometry that the sheet displays.</p>
+  </section>
+  <details id="tbSettings"><summary>Title block template</summary>
+   <div class="details-body">
+    <label class="check"><input id="tbEnabled" type="checkbox" checked>Show title block on all pages</label>
+    <div class="two"><label>Width (mm)<input id="tbWidth" type="number" min="1" step="0.1"></label><label>Height (mm)<input id="tbHeight" type="number" min="1" step="0.1"></label></div>
+    <button id="editTbBtn" class="wide">Edit title block on canvas</button>
+    <div class="two"><button id="resetTbBtn">Default template</button><button id="clearTbBtn">Clear template</button></div>
+    <p class="hint">Use the same drawing tools. Text can contain {TITLE}, {DRAWING_NUMBER}, {REVISION}, {PAGE}, or {PAGECOUNT}.</p>
+   </div>
+  </details>
+  <section id="inspector" class="side-section" hidden>
+    <div class="section-heading"><h2 id="selectionName">Selected object</h2><button id="deleteEntityBtn" class="small danger">Delete object</button></div>
+    <div id="geometryFields" class="two"></div>
+    <label id="selectedTextLabel" hidden>Text / variables<input id="selectedText" type="text" maxlength="50000"></label>
+    <div class="two"><button id="duplicateEntityBtn">Duplicate object</button><button id="deselectBtn">Deselect</button></div>
+  </section>
+  <section class="side-section exports">
+    <h2>Other exports</h2><button id="importReportBtn" hidden>Save import report</button>
+    <div class="two"><button id="svgBtn">SVG preview</button><button id="lispBtn">LISP fallback</button></div>
+    <p class="hint">DXF includes Model + linked Sheet viewports. LISP is a Model-only fallback for an empty test drawing. Exports are snapshots, not two-way sync.</p>
+  </section>
+ </aside>
+ <section class="workspace">
+  <div class="view-row">
+   <div class="view-tabs" role="group" aria-label="Canvas view"><button data-mode="model" class="active">Model overview</button><button data-mode="sheet">Selected page</button><button data-mode="title">Title block designer</button></div>
+   <div class="view-controls"><button id="fitBtn">Fit view</button><button id="zoomOutBtn" aria-label="Zoom out">-</button><button id="zoomInBtn" aria-label="Zoom in">+</button></div>
+  </div>
+  <div class="tools" role="toolbar" aria-label="Drawing tools">
+   <button data-tool="select" class="active" title="Select and move (V)">Select</button>
+   <button data-tool="line" title="Line (L)">Line</button><button data-tool="rect" title="Rectangle (R)">Rectangle</button>
+   <button data-tool="circle" title="Circle (C)">Circle</button><button data-tool="text" title="Text (T)">Text</button>
+   <button data-tool="pan" title="Pan (H)">Pan</button>
+   <span class="separator"></span><button id="undoBtn" title="Undo (Ctrl+Z)">Undo</button><button id="redoBtn" title="Redo (Ctrl+Shift+Z)">Redo</button>
+   <button id="cancelBtn" title="Cancel the unfinished shape (Escape)">Cancel</button>
+  </div>
+  <div class="drawing-options">
+   <label class="check"><input id="gridEnabled" type="checkbox" checked>Grid</label>
+   <label class="check"><input id="snapEnabled" type="checkbox" checked>Snap</label>
+   <label class="inline">Step <input id="snapStep" type="number" min="0.1" max="100" step="0.1" value="1"> mm</label>
+   <span id="entityCount" class="count">0 drawing objects</span>
+  </div>
+  <div id="textOptions" class="text-options" hidden>
+   <label>Text to place<input id="newText" type="text" value="Note" maxlength="50000"></label>
+   <label class="text-height">Height (mm)<input id="newTextHeight" type="number" value="3" min="0.2" max="100" step="0.1"></label>
+   <label class="variables">Insert variable<select id="variable"><option value="">Choose...</option><option>{TITLE}</option><option>{DRAWING_NUMBER}</option><option>{REVISION}</option><option>{PAGE}</option><option>{PAGECOUNT}</option><option>Sheet {PAGE} of {PAGECOUNT}</option></select></label>
+  </div>
+  <div id="toolHint" class="tool-hint">Select an object to move or edit it. Choose Line to start drawing.</div>
+  <div id="stage" class="stage">
+   <svg id="canvas" xmlns="http://www.w3.org/2000/svg" tabindex="0" aria-label="Drawing canvas"></svg>
+   <div id="toast" class="toast" role="status" hidden></div>
+  </div>
+  <div class="status-bar"><span id="coordinates">Coordinates in millimetres. Origin: bottom left of each page.</span><span id="saveStatus">Ready</span></div>
+ </section>
+</main>
+
+
+<dialog id="cadImportDialog" aria-labelledby="cadImportHeading">
+ <div class="cad-dialog-head"><h2 id="cadImportHeading">Import DWG / DXF <span class="pill">experimental</span></h2><button id="cadCloseBtn">Cancel / close</button></div>
+ <p class="cad-notice"><strong>Model import, not a lossless CAD conversion.</strong> This version places all Model geometry on one editing canvas, retaining its relative positions. It does not rebuild the original Sheet tabs. Your current project changes only when you accept the preview.</p>
+ <p class="hint">DWG decoding downloads LibreDWG-Web 0.7.17 from jsDelivr when you click Read drawing. Your drawing stays in a local browser worker; it is not sent to a conversion server. ASCII DXF import needs no network. The supplied E180 DWG has not been decoded in the development environment.</p>
+ <div class="two"><label>Drawing file<input id="cadFile" type="file" accept=".dwg,.dxf,.json"></label><div><label class="check"><input id="cadHidden" type="checkbox">Include off / frozen layers</label><button id="cadReadBtn" class="primary wide">Read drawing</button></div></div>
+ <p id="cadStatus" role="status"></p>
+ <div id="cadUnitBox" hidden><div class="two"><label>Source drawing units<select id="cadUnits"><option value="">Choose units...</option><option value="1">Millimetres</option><option value="25.4">Inches</option><option value="304.8">Feet</option><option value="10">Centimetres</option><option value="1000">Metres</option><option value="custom">Custom multiplier</option></select></label><label id="cadCustomScaleBox" hidden>Millimetres per source unit<input id="cadCustomScale" type="number" min="0.000001" step="any" value="1"></label></div><p class="hint" id="cadUnitNote"></p></div>
+ <p class="hint" id="cadSize"></p>
+ <div id="cadPreview" aria-label="Imported drawing preview"></div>
+ <details open><summary>Import report - skipped objects and simplifications</summary><pre id="cadDetails"></pre></details>
+ <label class="check cad-confirm"><input id="cadConfirmed" type="checkbox">I reviewed the preview and report. Load this simplified Model copy.</label>
+ <div class="cad-dialog-actions"><button id="cadDiagnosticBtn" disabled>Save decoder diagnostic JSON</button><button id="cadSaveJsonBtn" disabled>Save as project JSON</button><button id="cadAcceptBtn" class="primary" disabled>Load into editor</button></div>
+</dialog>
+
+<!-- PAGE_BUILDER_SCRIPTS -->
+</body>
+</html>

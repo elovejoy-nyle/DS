@@ -1,0 +1,1398 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DraftSight Page Builder</title>
+<style>
+:root {font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:13px;color:#202936;background:#edf1f5;--accent:#1463bc;--border:#d6dde5;--muted:#637186;--ink:#1e2a39;--panel:#fff;}
+*{box-sizing:border-box}body{margin:0;height:100vh;display:flex;flex-direction:column}button,input,select{font:inherit}button{border:1px solid var(--border);background:white;color:var(--ink);padding:8px 11px;border-radius:6px;cursor:pointer;white-space:nowrap}button:hover{background:#edf4fb;border-color:#8daccd}button:disabled{opacity:.4;cursor:default}button.primary{background:var(--accent);border-color:var(--accent);color:#fff}button.primary:hover{background:#0b529f}button.danger{color:#a42d36}button.small{font-size:12px;padding:6px 8px}button.active{background:#e5f1ff;border-color:#91bae9;color:#0c54a2}button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:2px solid #2682df;outline-offset:2px}button.wide{width:100%;margin:4px 0 9px}input,select{width:100%;min-width:0;padding:7px 8px;border:1px solid var(--border);border-radius:5px;background:#fff;color:var(--ink)}input[type=checkbox],input[type=radio]{width:auto;accent-color:var(--accent)}input:disabled{background:#f1f4f7;color:var(--muted)}label{display:block;font-size:12px;color:#415167;margin-top:9px}label>input,label>select{display:block;margin-top:4px}.two{display:grid;grid-template-columns:1fr 1fr;gap:8px}.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}.check{display:flex;align-items:center;gap:6px;white-space:nowrap}.check input{margin:0}h1,h2,p{margin:0}h2{font-size:13px;font-weight:650}.hint{font-size:11px;line-height:1.5;color:var(--muted);margin-top:9px}main{display:grid;grid-template-columns:310px minmax(0,1fr);flex:1;min-height:0}.app-header{display:flex;justify-content:space-between;align-items:center;padding:12px 18px;background:#1d2938;color:#fff;gap:16px}.brand{display:flex;gap:11px;align-items:center}.brand-mark{background:#307bd2;color:#fff;font-weight:700;border-radius:8px;padding:10px;letter-spacing:-1px}.brand h1{font-size:17px;font-weight:650}.brand small{font-size:11px;background:#334458;border-radius:4px;margin-left:4px;padding:2px 5px;vertical-align:middle}.brand p{color:#aebdd0;font-size:11px;margin-top:3px}.header-actions{display:flex;gap:7px;flex-wrap:wrap}.header-actions button:not(.primary){background:#2b3b4f;color:#e9f1fc;border-color:#455972}.header-actions button:hover{background:#3d536c}.header-actions button.primary:hover{background:#1d78dd}#sidebar{overflow-y:auto;background:#fff;border-right:1px solid var(--border);padding:12px;scrollbar-width:thin}.side-section{padding:14px 0;border-bottom:1px solid #e5ebf1}.section-heading{display:flex;justify-content:space-between;align-items:center;margin-bottom:9px;gap:6px}.pill{font-size:10px;background:#edf2f8;color:#60718a;padding:2px 7px;border-radius:10px;margin-left:5px}details{border-bottom:1px solid #e5ebf1;padding:10px 0}summary{font-size:13px;font-weight:650;cursor:pointer}.details-body{padding-top:5px;padding-bottom:3px}.radios{display:flex;flex-wrap:wrap;gap:14px;border:0;padding:3px 0 0;margin:0}.radios label{display:flex;gap:3px;align-items:center;margin-top:6px}.radios input{display:inline;margin:0}.page-list{display:grid;gap:5px;max-height:132px;overflow-y:auto}.page-row{display:flex;align-items:center;gap:9px;text-align:left;width:100%;padding:7px 9px}.page-row .page-number{background:#eef2f7;border-radius:4px;padding:4px 6px;color:#526277;font-size:11px}.page-row.active .page-number{background:#cce1fc;color:#134f93}.page-row .page-name{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1;font-size:12px}.page-row small{font-size:10px;color:#60718a}.page-actions{display:flex;gap:4px;margin-top:7px}.page-actions button{font-size:10px;padding:5px 6px;flex:1}.workspace{display:flex;flex-direction:column;min-height:0;min-width:0}.view-row{display:flex;align-items:center;justify-content:space-between;padding:9px 12px;background:#fff;border-bottom:1px solid var(--border);gap:8px}.view-tabs,.view-controls{display:flex;gap:5px}.view-tabs button{border-color:transparent;font-size:12px;padding:7px 10px}.view-tabs button.active{background:#e8f2fe;border-color:#c4dbf7}.view-controls button{font-size:12px;padding:6px 9px}.tools{display:flex;align-items:center;gap:6px;padding:10px 12px;background:#fff;border-bottom:1px solid #e8edf3;flex-wrap:wrap}.tools button{padding:7px 11px;font-size:12px}.separator{width:1px;height:22px;background:#dbe3ec;margin:0 3px}.drawing-options{display:flex;align-items:center;gap:15px;padding:7px 13px;background:#f9fbfd}.drawing-options label{margin:0;font-size:11px}.inline{display:flex;align-items:center;gap:5px}.inline input{width:58px;margin:0;padding:3px 5px}.count{margin-left:auto;font-size:11px;color:#60718a}.text-options{display:flex;align-items:flex-end;gap:8px;padding:0 12px 8px;background:#f9fbfd}.text-options label:first-child{flex:1}.text-height{width:92px}.variables{width:180px}.tool-hint{padding:8px 13px;font-size:12px;background:#edf4fc;color:#315878;border-bottom:1px solid #d7e5f4;min-height:33px}.stage{position:relative;flex:1;min-height:240px;overflow:hidden;background:#dee5ed}#canvas{display:block;width:100%;height:100%;touch-action:none;user-select:none;outline:none}#canvas[data-tool=line],#canvas[data-tool=rect],#canvas[data-tool=circle],#canvas[data-tool=text]{cursor:crosshair}#canvas[data-tool=pan]{cursor:grab}#canvas[data-panning=true]{cursor:grabbing}.status-bar{display:flex;justify-content:space-between;gap:10px;padding:7px 12px;background:#fff;border-top:1px solid var(--border);font-size:10px;color:#5e6f85;min-height:28px}.toast{position:absolute;left:14px;bottom:14px;max-width:calc(100% - 28px);font-size:12px;line-height:1.4;background:#22374c;color:white;padding:10px 14px;border-radius:6px;box-shadow:0 3px 12px #12223422;pointer-events:none}.toast.error{background:#9b3038}#bootError{padding:10px;background:#fff2d3;border-bottom:1px solid #e3d2ac;font-size:12px}#geometryFields label{margin-top:7px}#inspector .section-heading h2{font-size:12px}.exports .two button{font-size:12px}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}[hidden]{display:none!important}
+@media(max-width:1100px){main{grid-template-columns:280px minmax(0,1fr)}.app-header{padding:9px 12px}.brand h1{font-size:14px}.brand p{font-size:10px}.header-actions{gap:4px}.header-actions button{font-size:11px;padding:7px 8px}.view-tabs button{font-size:11px;padding:7px}.view-row{padding:8px}.tools{padding:8px;gap:4px}.tools button{padding:7px 8px}.drawing-options{gap:9px}}
+@media(max-width:760px){body{height:auto;min-height:100vh}.app-header{align-items:flex-start;flex-direction:column;gap:9px}.header-actions{width:100%}.header-actions button{flex:1}main{display:flex;flex-direction:column-reverse}#sidebar{border-right:none;border-top:1px solid var(--border);overflow:visible}.workspace{height:72vh;min-height:520px}.view-row{flex-wrap:wrap}.stage{min-height:250px}.status-bar{font-size:9px}.variables{width:135px}.count{display:none}.text-options{flex-wrap:wrap}#sidebar .page-list{max-height:150px}}
+
+#cadImportDialog{max-width:980px;width:94vw;max-height:93vh;padding:20px;border:1px solid var(--border);border-radius:10px;color:var(--ink);overflow-y:auto}#cadImportDialog::backdrop{background:#162232a6}.cad-dialog-head,.cad-dialog-actions{display:flex;align-items:center;justify-content:space-between;gap:10px}.cad-dialog-actions{justify-content:flex-end;flex-wrap:wrap;margin-top:14px}.cad-notice{padding:12px;background:#fff4d8;border-left:3px solid #dbb455;line-height:1.55;margin:14px 0 8px}#cadStatus{padding:10px;margin:8px 0;background:#e8f2fb;line-height:1.5}#cadStatus.error{background:#fee9e9;color:#842530}#cadPreview{background:#fff;border:1px solid #dde4ed;min-height:30px;margin-top:12px}#cadPreview svg{display:block;width:100%}#cadDetails{font-size:11px;line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere;max-height:260px;overflow-y:auto;background:#f5f7fa;padding:10px}.cad-confirm{white-space:normal;line-height:1.5}#importReportBtn{font-size:11px}
+
+</style>
+</head>
+<body>
+<header class="app-header">
+  <div class="brand"><span class="brand-mark" aria-hidden="true">PB</span><div><h1>DraftSight Page Builder <small>0.3 import beta</small></h1><p>Draw here. Export text-based CAD pages.</p></div></div>
+  <div class="header-actions">
+    <button id="newBtn">New</button><button id="sampleBtn">Load sample</button>
+    <button id="saveBtn">Save project</button><button id="loadBtn">Open project</button>
+    <input id="loadInput" type="file" accept=".json,application/json" hidden>
+    <button id="importCadBtn">Import DWG / DXF</button><button id="dxfBtn" class="primary">Export DXF</button>
+  </div>
+</header>
+<div id="bootError" role="alert">Starting drawing engine. If this message stays visible, the app did not start.</div>
+<noscript>This application needs JavaScript enabled to draw and export.</noscript>
+<main>
+ <aside id="sidebar">
+  <details open><summary>Paper &amp; model spacing</summary>
+   <div class="details-body">
+    <fieldset class="radios"><legend class="sr-only">Paper size</legend>
+     <label><input type="radio" name="paper" value="letter" checked>Letter</label>
+     <label><input type="radio" name="paper" value="legal">Legal</label>
+     <label><input type="radio" name="paper" value="a4">A4</label>
+     <label><input type="radio" name="paper" value="custom">Custom</label>
+    </fieldset>
+    <div class="two"><label>Orientation<select id="orientation"><option value="portrait">Portrait</option><option value="landscape">Landscape</option></select></label>
+    <label>Gap, edge to edge (mm)<input id="gap" type="number" min="0" max="5000" step="0.1" value="10"></label></div>
+    <div class="three"><label>Width (mm)<input id="width" type="number" min="50" max="1000000" step="0.1"></label><label>Height (mm)<input id="height" type="number" min="50" max="1000000" step="0.1"></label><label>Margin (mm)<input id="margin" type="number" min="0" step="0.1"></label></div>
+   </div>
+  </details>
+  <section class="side-section">
+   <div class="section-heading"><h2>Pages <span id="pageCount" class="pill">1</span></h2><button id="addPageBtn" class="primary small">+ Add page</button></div>
+   <div id="pageList" class="page-list"></div>
+   <div class="page-actions"><button id="pageLeftBtn" title="Move selected page earlier">Move left</button><button id="pageRightBtn" title="Move selected page later">Move right</button><button id="duplicatePageBtn">Duplicate</button><button id="deletePageBtn" class="danger">Delete</button></div>
+   <label>Page title<input id="pageTitle" type="text" maxlength="100"></label>
+   <div class="two"><label>Drawing number<input id="drawingNumber" type="text" maxlength="80"></label><label>Revision<input id="revision" type="text" maxlength="20"></label></div>
+   <p class="hint">The title and Sheet X of N appear in the same model geometry that the sheet displays.</p>
+  </section>
+  <details id="tbSettings"><summary>Title block template</summary>
+   <div class="details-body">
+    <label class="check"><input id="tbEnabled" type="checkbox" checked>Show title block on all pages</label>
+    <div class="two"><label>Width (mm)<input id="tbWidth" type="number" min="1" step="0.1"></label><label>Height (mm)<input id="tbHeight" type="number" min="1" step="0.1"></label></div>
+    <button id="editTbBtn" class="wide">Edit title block on canvas</button>
+    <div class="two"><button id="resetTbBtn">Default template</button><button id="clearTbBtn">Clear template</button></div>
+    <p class="hint">Use the same drawing tools. Text can contain {TITLE}, {DRAWING_NUMBER}, {REVISION}, {PAGE}, or {PAGECOUNT}.</p>
+   </div>
+  </details>
+  <section id="inspector" class="side-section" hidden>
+    <div class="section-heading"><h2 id="selectionName">Selected object</h2><button id="deleteEntityBtn" class="small danger">Delete object</button></div>
+    <div id="geometryFields" class="two"></div>
+    <label id="selectedTextLabel" hidden>Text / variables<input id="selectedText" type="text" maxlength="50000"></label>
+    <div class="two"><button id="duplicateEntityBtn">Duplicate object</button><button id="deselectBtn">Deselect</button></div>
+  </section>
+  <section class="side-section exports">
+    <h2>Other exports</h2><button id="importReportBtn" hidden>Save import report</button>
+    <div class="two"><button id="svgBtn">SVG preview</button><button id="lispBtn">LISP fallback</button></div>
+    <p class="hint">DXF includes Model + linked Sheet viewports. LISP is a Model-only fallback for an empty test drawing. Exports are snapshots, not two-way sync.</p>
+  </section>
+ </aside>
+ <section class="workspace">
+  <div class="view-row">
+   <div class="view-tabs" role="group" aria-label="Canvas view"><button data-mode="model" class="active">Model overview</button><button data-mode="sheet">Selected page</button><button data-mode="title">Title block designer</button></div>
+   <div class="view-controls"><button id="fitBtn">Fit view</button><button id="zoomOutBtn" aria-label="Zoom out">-</button><button id="zoomInBtn" aria-label="Zoom in">+</button></div>
+  </div>
+  <div class="tools" role="toolbar" aria-label="Drawing tools">
+   <button data-tool="select" class="active" title="Select and move (V)">Select</button>
+   <button data-tool="line" title="Line (L)">Line</button><button data-tool="rect" title="Rectangle (R)">Rectangle</button>
+   <button data-tool="circle" title="Circle (C)">Circle</button><button data-tool="text" title="Text (T)">Text</button>
+   <button data-tool="pan" title="Pan (H)">Pan</button>
+   <span class="separator"></span><button id="undoBtn" title="Undo (Ctrl+Z)">Undo</button><button id="redoBtn" title="Redo (Ctrl+Shift+Z)">Redo</button>
+   <button id="cancelBtn" title="Cancel the unfinished shape (Escape)">Cancel</button>
+  </div>
+  <div class="drawing-options">
+   <label class="check"><input id="gridEnabled" type="checkbox" checked>Grid</label>
+   <label class="check"><input id="snapEnabled" type="checkbox" checked>Snap</label>
+   <label class="inline">Step <input id="snapStep" type="number" min="0.1" max="100" step="0.1" value="1"> mm</label>
+   <span id="entityCount" class="count">0 drawing objects</span>
+  </div>
+  <div id="textOptions" class="text-options" hidden>
+   <label>Text to place<input id="newText" type="text" value="Note" maxlength="50000"></label>
+   <label class="text-height">Height (mm)<input id="newTextHeight" type="number" value="3" min="0.2" max="100" step="0.1"></label>
+   <label class="variables">Insert variable<select id="variable"><option value="">Choose...</option><option>{TITLE}</option><option>{DRAWING_NUMBER}</option><option>{REVISION}</option><option>{PAGE}</option><option>{PAGECOUNT}</option><option>Sheet {PAGE} of {PAGECOUNT}</option></select></label>
+  </div>
+  <div id="toolHint" class="tool-hint">Select an object to move or edit it. Choose Line to start drawing.</div>
+  <div id="stage" class="stage">
+   <svg id="canvas" xmlns="http://www.w3.org/2000/svg" tabindex="0" aria-label="Drawing canvas"></svg>
+   <div id="toast" class="toast" role="status" hidden></div>
+  </div>
+  <div class="status-bar"><span id="coordinates">Coordinates in millimetres. Origin: bottom left of each page.</span><span id="saveStatus">Ready</span></div>
+ </section>
+</main>
+
+
+<dialog id="cadImportDialog" aria-labelledby="cadImportHeading">
+ <div class="cad-dialog-head"><h2 id="cadImportHeading">Import DWG / DXF <span class="pill">experimental</span></h2><button id="cadCloseBtn">Cancel / close</button></div>
+ <p class="cad-notice"><strong>Model import, not a lossless CAD conversion.</strong> This version places all Model geometry on one editing canvas, retaining its relative positions. It does not rebuild the original Sheet tabs. Your current project changes only when you accept the preview.</p>
+ <p class="hint">DWG decoding downloads LibreDWG-Web 0.7.17 from jsDelivr when you click Read drawing. Your drawing stays in a local browser worker; it is not sent to a conversion server. ASCII DXF import needs no network. The supplied E180 DWG has not been decoded in the development environment.</p>
+ <div class="two"><label>Drawing file<input id="cadFile" type="file" accept=".dwg,.dxf,.json"></label><div><label class="check"><input id="cadHidden" type="checkbox">Include off / frozen layers</label><button id="cadReadBtn" class="primary wide">Read drawing</button></div></div>
+ <p id="cadStatus" role="status"></p>
+ <div id="cadUnitBox" hidden><div class="two"><label>Source drawing units<select id="cadUnits"><option value="">Choose units...</option><option value="1">Millimetres</option><option value="25.4">Inches</option><option value="304.8">Feet</option><option value="10">Centimetres</option><option value="1000">Metres</option><option value="custom">Custom multiplier</option></select></label><label id="cadCustomScaleBox" hidden>Millimetres per source unit<input id="cadCustomScale" type="number" min="0.000001" step="any" value="1"></label></div><p class="hint" id="cadUnitNote"></p></div>
+ <p class="hint" id="cadSize"></p>
+ <div id="cadPreview" aria-label="Imported drawing preview"></div>
+ <details open><summary>Import report - skipped objects and simplifications</summary><pre id="cadDetails"></pre></details>
+ <label class="check cad-confirm"><input id="cadConfirmed" type="checkbox">I reviewed the preview and report. Load this simplified Model copy.</label>
+ <div class="cad-dialog-actions"><button id="cadDiagnosticBtn" disabled>Save decoder diagnostic JSON</button><button id="cadSaveJsonBtn" disabled>Save as project JSON</button><button id="cadAcceptBtn" class="primary" disabled>Load into editor</button></div>
+</dialog>
+
+<script>
+
+/* Page Builder 0.2.0. Pure project geometry and text exporters; no network calls. */
+(function (root) {
+  'use strict';
+  const VERSION = '0.3.0-import-beta';
+  // CAD TEXT height describes glyph height, not a browser CSS em square.
+  // Arial's approximate cap-height ratio keeps browser previews closer to CAD.
+  const TEXT_EM = 1.4;
+  const clone = x => JSON.parse(JSON.stringify(x));
+  const uid = () => 'e_' + Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
+  const num = n => Number(Number(n).toFixed(6));
+  const finite = (x, fallback) => Number.isFinite(Number(x)) ? Number(x) : fallback;
+  const text = x => String(x == null ? '' : x).replace(/[\r\n\t]/g, ' ').slice(0, 50000);
+  const presets = {letter:[215.9,279.4], legal:[215.9,355.6], a4:[210,297]};
+  function entity(type, props) { return Object.assign({id:uid(), type}, props); }
+
+// Match our existing template as defualt.
+function defaults() {
+  return [
+    // Outer boundary: 145 x 40 mm.
+    // Coordinates start at the title block's bottom-left corner.
+    entity('rect', {
+      x1: 0, y1: 0,
+      x2: 145, y2: 40
+    }),
+
+    // Horizontal row dividers.
+    entity('line', {x1: 0, y1: 28,   x2: 145, y2: 28}),
+    entity('line', {x1: 0, y1: 15.5, x2: 145, y2: 15.5}),
+    entity('line', {x1: 0, y1: 8,    x2: 145, y2: 8}),
+
+    // Main divider: production/drawing personnel on the left.
+    entity('line', {x1: 55, y1: 0, x2: 55, y2: 40}),
+
+    // DWG NUMBER / REV divider, in the third row only.
+    entity('line', {x1: 120, y1: 8, x2: 120, y2: 15.5}),
+
+    // SCALE / SHEET divider, in the bottom row only.
+    entity('line', {x1: 110, y1: 0, x2: 110, y2: 8}),
+
+    // Row 1: PRODUCTION START DATE | TITLE
+    entity('text', {
+      x: 1.5, y: 37.5, h: 1.8,
+      text: 'PRODUCTION START DATE'
+    }),
+    entity('text', {
+      x: 2, y: 31.5, h: 3,
+      text: '{PRODUCTION_START_DATE}'
+    }),
+    entity('text', {
+      x: 56.5, y: 37.5, h: 1.8,
+      text: 'TITLE'
+    }),
+    entity('text', {
+      x: 78, y: 31.5, h: 4,
+      text: '{TITLE}'
+    }),
+
+    // Row 2: PRODUCTION END DATE | MODEL
+    entity('text', {
+      x: 1.5, y: 25.5, h: 1.8,
+      text: 'PRODUCTION END DATE'
+    }),
+    entity('text', {
+      x: 2, y: 19, h: 3,
+      text: '{PRODUCTION_END_DATE}'
+    }),
+    entity('text', {
+      x: 56.5, y: 25.5, h: 1.8,
+      text: 'MODEL'
+    }),
+    entity('text', {
+      x: 74, y: 19, h: 4,
+      text: '{MODEL}'
+    }),
+
+    // Row 3: DRAWN BY | DWG NUMBER | REV
+    entity('text', {
+      x: 1.5, y: 13.1, h: 1.8,
+      text: 'DRAWN BY'
+    }),
+    entity('text', {
+      x: 2, y: 9.3, h: 2.8,
+      text: '{DRAWN_BY}'
+    }),
+    entity('text', {
+      x: 56.5, y: 13.1, h: 1.8,
+      text: 'DWG NUMBER'
+    }),
+    entity('text', {
+      x: 84, y: 9.3, h: 2.8,
+      text: '{DRAWING_NUMBER}'
+    }),
+    entity('text', {
+      x: 121.5, y: 13.1, h: 1.8,
+      text: 'REV'
+    }),
+    entity('text', {
+      x: 130, y: 9.3, h: 2.8,
+      text: '{REVISION}'
+    }),
+
+    // Row 4: CHECKED | SCALE | SHEET
+    entity('text', {
+      x: 1.5, y: 5.6, h: 1.8,
+      text: 'CHECKED'
+    }),
+    entity('text', {
+      x: 2, y: 1.6, h: 2.8,
+      text: '{CHECKED}'
+    }),
+    entity('text', {
+      x: 56.5, y: 5.6, h: 1.8,
+      text: 'SCALE'
+    }),
+    entity('text', {
+      x: 77, y: 1.6, h: 3,
+      text: '{SCALE}'
+    }),
+    entity('text', {
+      x: 111.5, y: 5.6, h: 1.8,
+      text: 'SHEET'
+    }),
+    entity('text', {
+      x: 118, y: 1.6, h: 3,
+      text: '{PAGE} OF {PAGECOUNT}'
+    })
+  ];
+}
+  function newPage(n=1) { return {id:uid(),title:n===1?'UNTITLED':'PAGE '+n,number:'DWG-001',revision:'A',entities:[]}; }
+  function newProject() {
+    return {format:'DraftSightPageBuilder',version:3,units:'mm',coordinateSystem:'cad-y-up',
+		paper: {
+		  preset: 'letter',
+		  orientation: 'portrait',
+		  width: 215.9,
+		  height: 279.4
+		},
+		  gap:10,margin:8,
+      titleBlock:{enabled:true,width:145,height:40,entities:defaults()},pages:[newPage()]};
+  }
+  function sampleProject() {
+    const p=newProject();
+    p.pages=[newPage(1),newPage(2)];
+    p.pages[0].title='CONTROL POWER - SAMPLE';p.pages[1].title='ANALOG + COMS - SAMPLE';
+    const a=p.pages[0].entities,b=p.pages[1].entities;
+    a.push(entity('text',{x:25,y:184,h:5,text:'Drawing / export test'}));
+    a.push(entity('text',{x:25,y:174,h:3,text:'Sample geometry only - not a wiring design'}));
+    a.push(entity('line',{x1:30,y1:140,x2:130,y2:140}));
+    a.push(entity('line',{x1:30,y1:137,x2:30,y2:143}));
+    a.push(entity('line',{x1:130,y1:137,x2:130,y2:143}));
+    a.push(entity('text',{x:50,y:146,h:3,text:'100 mm test line'}));
+    a.push(entity('rect',{x1:35,y1:75,x2:85,y2:115}));
+    a.push(entity('text',{x:41,y:93,h:3,text:'50 x 40 mm'}));
+    a.push(entity('line',{x1:85,y1:95,x2:130,y2:95}));
+    a.push(entity('circle',{x:140,y:95,r:10}));
+    a.push(entity('line',{x1:150,y1:95,x2:205,y2:95}));
+    a.push(entity('text',{x:129,y:111,h:3,text:'R10 mm'}));
+    b.push(entity('text',{x:25,y:184,h:5,text:'Second page'}));
+    b.push(entity('text',{x:25,y:173,h:3,text:'This is a separate sheet showing this model page.'}));
+    for(let i=0;i<4;i++) {
+      b.push(entity('rect',{x1:35,y1:125-i*15,x2:55,y2:135-i*15}));
+      b.push(entity('text',{x:40,y:128-i*15,h:2.8,text:'X'+(i+1)}));
+      b.push(entity('line',{x1:55,y1:130-i*15,x2:165,y2:130-i*15}));
+    }
+    b.push(entity('rect',{x1:165,y1:75,x2:220,y2:145}));
+    b.push(entity('text',{x:174,y:109,h:3,text:'CONTROLLER'}));
+    return p;
+  }
+  function validateProject(input) {
+    if(!input || typeof input!=='object' || !Array.isArray(input.pages) || input.pages.length<1 || input.pages.length>200)
+      throw Error('Project must contain between 1 and 200 pages.');
+    if(input.version!==1 && input.version!==2 && input.version!==3) throw Error('Unsupported project version.');
+    const p=newProject();
+    const number=(value,min,max,label)=>{const n=Number(value);if(!Number.isFinite(n)||n<min||n>max)throw Error(label+' must be between '+min+' and '+max+'.');return n;};
+    const paper=input.paper || {};
+    p.paper={preset:paper.preset in presets?paper.preset:'custom',orientation:paper.orientation==='portrait'?'portrait':'landscape',
+      width:number(paper.width,50,1000000,'Paper width'),height:number(paper.height,50,1000000,'Paper height')};
+    p.gap=number(input.gap,0,5000,'Page gap');
+    p.margin=number(input.margin,0,Math.min(p.paper.width,p.paper.height)/2-0.1,'Border margin');
+    let count=0;
+    function checked(e) {
+      if(!e || !['line','rect','circle','arc','path','fill','text','variable'].includes(e.type)) throw Error('Unknown drawing entity.');
+      if(++count>60000) throw Error('Project exceeds 60,000 entities.');
+      const type=e.type==='variable'?'text':e.type;
+      const out={id:uid(),type};
+      const cp=p=>({x:number(p.x,-1e9,1e9,'X'),y:number(p.y,-1e9,1e9,'Y')});
+      if(type==='path') {
+        if(!Array.isArray(e.points)||e.points.length<2||e.points.length>10000)throw Error('Invalid polyline.');
+        out.points=e.points.map(cp);out.closed=!!e.closed;
+      } else if(type==='fill') {
+        if(!Array.isArray(e.loops)||e.loops.length<1||e.loops.length>1000)throw Error('Invalid fill.');
+        out.loops=e.loops.map(l=>{if(!Array.isArray(l)||l.length<3||l.length>10000)throw Error('Invalid fill boundary.');return l.map(cp);});
+      } else {
+        const fields=type==='line'||type==='rect'?['x1','y1','x2','y2']:type==='circle'||type==='arc'?['x','y','r']:['x','y','h'];
+        fields.forEach(k=>{out[k]=number(e[k],k==='h'||k==='r'?0.000001:-1e9,1e9,k);});
+      }
+      if(type==='arc'){out.start=number(e.start,-1e7,1e7,'Start angle');out.end=number(e.end,-1e7,1e7,'End angle');}
+      if(type==='text') {
+        if(String(e.text||'').length>50000)throw Error('Text is too long.');
+        out.text=text(e.text);out.angle=number(e.angle||0,-1e7,1e7,'Text angle');
+        out.widthFactor=number(e.widthFactor===undefined?1:e.widthFactor,0.001,1000,'Text width factor');
+        out.halign=number(e.halign||0,0,2,'Horizontal alignment');out.valign=number(e.valign||0,0,3,'Vertical alignment');
+      }
+      ['layer','sourceType','sourceHandle','sourceLineType'].forEach(k=>{if(e[k]!==undefined)out[k]=String(e[k]).slice(0,255);});
+      if(e.literal)out.literal=true;
+      if(Number.isInteger(e.colorIndex))out.colorIndex=e.colorIndex;
+      if(Number.isInteger(e.trueColor)&&e.trueColor>=0&&e.trueColor<=0xffffff)out.trueColor=e.trueColor;
+      return out;
+    }
+    const tb=input.titleBlock || {};
+    p.titleBlock={enabled:tb.enabled!==false,width:number(tb.width,1,5000,'Title block width'),height:number(tb.height,1,5000,'Title block height'),
+      entities:Array.isArray(tb.entities)?tb.entities.map(checked):defaults()};
+    p.pages=input.pages.map((page,i)=>{
+      if(!page || !Array.isArray(page.entities)) throw Error('Page '+(i+1)+' has no entity list.');
+      const entities=page.entities.map(checked);
+      // Version 1 displayed user drawing coordinates with SVG's downward Y axis.
+      // Its title-block template was already intended as CAD-up, so only migrate drawing entities.
+      if(input.version===1) entities.forEach(e=>{
+        if(e.type==='line'||e.type==='rect') {e.y1=p.paper.height-e.y1;e.y2=p.paper.height-e.y2;}
+        else e.y=p.paper.height-e.y;
+      });
+      return {id:uid(),title:text(page.title),number:text(page.number),revision:text(page.revision),productionStartDate:text(page.productionStartDate),productionEndDate:text(page.productionEndDate),model:text(page.model),drawnBy:text(page.drawnBy),checked:text(page.checked),scale:page.scale===undefined?'NTS':text(page.scale),frame:page.frame!==false,entities};
+    });
+    if(input.importInfo&&typeof input.importInfo==='object')p.importInfo=clone(input.importInfo);
+    return p;
+  }
+	function vars(s, page, index, total) {
+	  const values = {
+		TITLE:                 page.title               ?? '',
+		DRAWING_NUMBER:        page.number              ?? '',
+		REVISION:              page.revision            ?? '',
+		PAGE:                  index + 1,
+		PAGECOUNT:             total,
+
+		PRODUCTION_START_DATE: page.productionStartDate ?? '',
+		PRODUCTION_END_DATE:   page.productionEndDate   ?? '',
+		MODEL:                 page.model               ?? '',
+		DRAWN_BY:              page.drawnBy             ?? '',
+		CHECKED:               page.checked             ?? '',
+		SCALE:                 page.scale               ?? 'NTS'
+	  };
+
+	  return text(s).replace(
+		/\{([A-Z_]+)\}/g,
+		(match, key) =>
+		  Object.prototype.hasOwnProperty.call(values, key)
+			? String(values[key])
+			: match
+	  );
+	}
+ 
+  function origin(p,index) { return {x:num(index*(p.paper.width+p.gap)),y:0}; }
+  function moved(e,dx,dy) {
+    const r=clone(e);
+    if(e.type==='line'||e.type==='rect') {r.x1=num(e.x1+dx);r.y1=num(e.y1+dy);r.x2=num(e.x2+dx);r.y2=num(e.y2+dy);}
+    else if(e.type==='path')r.points=e.points.map(p=>({x:num(p.x+dx),y:num(p.y+dy)}));
+    else if(e.type==='fill')r.loops=e.loops.map(l=>l.map(p=>({x:num(p.x+dx),y:num(p.y+dy)})));
+    else {r.x=num(e.x+dx);r.y=num(e.y+dy);}
+    return r;
+  }
+  function scene(p) {
+    const out=[];
+    function add(e,dx,dy,layer,page,index) {
+      const r=moved(e,dx,dy);r.layer=layer;r.page=index;
+      if(r.type==='text'&&!r.literal) r.text=vars(r.text,page,index,p.pages.length);
+      out.push(r);
+    }
+    p.pages.forEach((page,i)=>{
+      const x=origin(p,i).x,W=p.paper.width,H=p.paper.height,m=p.margin;
+      add(entity('rect',{x1:0,y1:0,x2:W,y2:H}),x,0,'PAGE-EDGE',page,i);
+      if(page.frame!==false)add(entity('rect',{x1:m,y1:m,x2:W-m,y2:H-m}),x,0,'PAGE-FRAME',page,i);
+      page.entities.forEach(e=>add(e,x,0,e.layer||'SCHEMATIC',page,i));
+      if(p.titleBlock.enabled) p.titleBlock.entities.forEach(e=>add(e,x+W-m-p.titleBlock.width,m,'PAGE-FRAME',page,i));
+    });
+    return out;
+  }
+  function primitives(entities) {
+    return entities.flatMap(e=>e.type!=='rect'?[e]:[
+      {...e,type:'line',x1:e.x1,y1:e.y1,x2:e.x2,y2:e.y1},
+      {...e,type:'line',x1:e.x2,y1:e.y1,x2:e.x2,y2:e.y2},
+      {...e,type:'line',x1:e.x2,y1:e.y2,x2:e.x1,y2:e.y2},
+      {...e,type:'line',x1:e.x1,y1:e.y2,x2:e.x1,y2:e.y1}
+    ]);
+  }
+  function ascii(s) {
+    // DXF text is kept on one physical line. Encode non-ASCII UTF-16 code units.
+    return text(s).replace(/[^\x20-\x7e]/g,c=>'\\U+'+c.charCodeAt(0).toString(16).toUpperCase().padStart(4,'0'));
+  }
+  function xml(s) {return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[c]));}
+  function ink(e) {
+    if(Number.isInteger(e.trueColor)&&e.trueColor>0&&e.trueColor<0xf0f0f0)return '#'+e.trueColor.toString(16).padStart(6,'0');
+    return ({1:'#b51f2b',2:'#9a7400',3:'#087833',4:'#007b88',5:'#1b4da0',6:'#99359b'}[Math.abs(e.colorIndex)]||'#1a2430');
+  }
+  function shapePath(e,svgCoords=true) {
+    const y=v=>svgCoords?-v:v;
+    if(e.type==='arc') {
+      const a=e.start*Math.PI/180,b=e.end*Math.PI/180,d=((e.end-e.start)%360+360)%360;
+      return 'M '+(e.x+e.r*Math.cos(a))+' '+y(e.y+e.r*Math.sin(a))+' A '+e.r+' '+e.r+' 0 '+(d>180?1:0)+' '+(svgCoords?0:1)+' '+(e.x+e.r*Math.cos(b))+' '+y(e.y+e.r*Math.sin(b));
+    }
+    const loop=ps=>ps.map((p,i)=>(i?'L ':'M ')+p.x+' '+y(p.y)).join(' ');
+    if(e.type==='path')return loop(e.points)+(e.closed?' Z':'');
+    if(e.type==='fill')return e.loops.map(l=>loop(l)+' Z').join(' ');
+    return '';
+  }
+  function textYOffset(e){return e.valign===3?e.h:e.valign===2?e.h/2:0;}
+  function svg(p) {
+    const W=p.pages.length*p.paper.width+(p.pages.length-1)*p.gap,H=p.paper.height;
+    const lines=[`<svg xmlns="http://www.w3.org/2000/svg" width="${num(W)}mm" height="${num(H)}mm" viewBox="0 ${-H} ${num(W)} ${H}">`, '<title>Page Builder - model pages</title>'];
+    p.pages.forEach((page,i)=>lines.push(`<rect x="${origin(p,i).x}" y="${-H}" width="${p.paper.width}" height="${H}" fill="white" stroke="none"/>`));
+    for(const e of scene(p)) {
+      const stroke=e.layer==='PAGE-EDGE'?'#9ca3af':ink(e);
+      if(e.type==='line')lines.push(`<line x1="${e.x1}" y1="${-e.y1}" x2="${e.x2}" y2="${-e.y2}" stroke="${stroke}" stroke-width="0.3"/>`);
+      else if(e.type==='rect')lines.push(`<rect x="${Math.min(e.x1,e.x2)}" y="${-Math.max(e.y1,e.y2)}" width="${Math.abs(e.x2-e.x1)}" height="${Math.abs(e.y2-e.y1)}" fill="none" stroke="${stroke}" stroke-width="0.3"/>`);
+      else if(e.type==='circle')lines.push(`<circle cx="${e.x}" cy="${-e.y}" r="${e.r}" fill="none" stroke="${stroke}" stroke-width="0.3"/>`);
+      else if(['arc','path','fill'].includes(e.type))lines.push(`<path d="${shapePath(e)}" fill="${e.type==='fill'?stroke:'none'}" fill-rule="evenodd" stroke="${stroke}" stroke-width="${e.type==='fill'?0:0.3}"/>`);
+      else lines.push(`<text transform="translate(${e.x} ${-e.y}) rotate(${-finite(e.angle,0)}) scale(${finite(e.widthFactor,1)} 1)" x="0" y="${textYOffset(e)}" text-anchor="${e.halign===1?'middle':e.halign===2?'end':'start'}" font-family="Arial, sans-serif" font-size="${num(e.h*TEXT_EM)}" fill="${stroke}">${xml(e.text)}</text>`);
+    }
+    lines.push('</svg>');return lines.join('\n');
+  }
+  function dxf(p,withSheets=true) {
+    // R2000 ASCII: full ownership chain, per-layout block records, LAYOUT objects,
+    // paper settings and locked 1:1 viewports. No binary data or runtime dependency.
+    let next=0x100;
+    const handle=()=> (next++).toString(16).toUpperCase();
+    const rootH=handle(),layoutDict=handle(),groupDict=handle(),plotDict=handle();
+    const tables={};['VPORT','LTYPE','LAYER','STYLE','VIEW','UCS','APPID','DIMSTYLE','BLOCK_RECORD'].forEach(n=>tables[n]=handle());
+    const blocks=[{name:'*Model_Space',layout:'Model',index:0}];
+    const paperCount=withSheets?p.pages.length:1;
+    for(let i=0;i<paperCount;i++) blocks.push({name:i===0?'*Paper_Space':'*Paper_Space'+(i-1),layout:'Page-'+(i+1),index:i+1});
+    blocks.forEach(b=>{b.record=handle();b.begin=handle();b.end=handle();b.object=handle();if(b.index){b.main=handle();if(withSheets)b.vp=handle();}});
+    const model=blocks[0],W=p.paper.width,H=p.paper.height,totalW=p.pages.length*W+(p.pages.length-1)*p.gap;
+    const pair=(code,val)=>String(code)+'\n'+(typeof val==='number'?num(val):val)+'\n';
+    const tags=a=>a.map(t=>pair(t[0],t[1])).join('');
+    const xyz=(code,x,y,z=0)=>[[code,x],[code+10,y],[code+20,z]];
+    const sec=(name,body)=>tags([[0,'SECTION'],[2,name]])+body+tags([[0,'ENDSEC']]);
+    function table(name,entries){return tags([[0,'TABLE'],[2,name],[5,tables[name]],[330,'0'],[100,'AcDbSymbolTable'],[70,entries.length]])+entries.join('')+tags([[0,'ENDTAB']]);}
+    function entry(type,subclass,name,more=[]) {return tags([[0,type],[5,handle()],[330,tables[type]],[100,'AcDbSymbolTableRecord'],[100,subclass],[2,name],...more]);}
+    const t=[];
+    t.push(table('VPORT',[entry('VPORT','AcDbViewportTableRecord','*Active',[[70,0],[10,0],[20,0],[11,1],[21,1],[12,totalW/2],[22,H/2],[13,0],[23,0],[14,1],[24,1],[15,10],[25,10],...xyz(16,0,0,1),...xyz(17,0,0),[40,Math.max(H*1.15,totalW/1.6*1.05)],[41,1.6],[42,50],[43,0],[44,0],[50,0],[51,0],[71,0],[72,1000],[73,0],[74,3],[75,0],[76,0],[77,0],[78,0],[281,0],[65,0],[146,0]])]));
+    t.push(table('LTYPE',['ByBlock','ByLayer','Continuous'].map(n=>entry('LTYPE','AcDbLinetypeTableRecord',n,[[70,0],[3,n==='Continuous'?'Solid line':''],[72,65],[73,0],[40,0]]))));
+    const layerNames=[...new Set(['0','PAGE-EDGE','PAGE-FRAME','SCHEMATIC','VIEWPORTS',...scene(p).map(e=>e.layer)])];
+    t.push(table('LAYER',layerNames.map(n=>entry('LAYER','AcDbLayerTableRecord',n,[[70,0],[62,7],[6,'Continuous'],[290,n==='PAGE-EDGE'||n==='VIEWPORTS'?0:1],[370,-3]]))));
+    t.push(table('STYLE',[entry('STYLE','AcDbTextStyleTableRecord','Standard',[[70,0],[40,0],[41,1],[50,0],[71,0],[42,2.5],[3,'txt'],[4,'']])]));
+    t.push(table('VIEW',[]),table('UCS',[]));
+    t.push(table('APPID',[entry('APPID','AcDbRegAppTableRecord','ACAD',[[70,0]])]));
+    t.push(table('DIMSTYLE',[]));
+    t.push(table('BLOCK_RECORD',blocks.map(b=>tags([[0,'BLOCK_RECORD'],[5,b.record],[330,tables.BLOCK_RECORD],[100,'AcDbSymbolTableRecord'],[100,'AcDbBlockTableRecord'],[2,b.name],[340,b.object]]))));
+    const base=(type,h,owner,layer,paper)=>[[0,type],[5,h],[330,owner],[100,'AcDbEntity'],...(paper?[[67,1],[410,paper]]:[[67,0],[410,'Model']]),[8,layer]];
+    function viewport(b,main) {
+      const cx=W/2,cy=H/2;
+      return tags([...base('VIEWPORT',main?b.main:b.vp,b.record,'VIEWPORTS',b.layout),[100,'AcDbViewport'],
+        ...xyz(10,cx,cy),[40,main?W*1.1:W],[41,main?H*1.1:H],[68,main?1:2],[69,main?1:2],
+        [12,main?cx:origin(p,b.index-1).x+cx],[22,cy],[13,0],[23,0],[14,1],[24,1],[15,10],[25,10],
+        ...xyz(16,0,0,1),...xyz(17,0,0),[42,50],[43,0],[44,0],[45,main?H*1.1:H],[50,0],[51,0],[72,100],
+        [90,main?557088:16384],[1,''],[281,0],[71,0],[74,0],...xyz(110,0,0),...xyz(111,1,0),...xyz(112,0,1),[79,0],[146,0]]);
+    }
+    const paperEntities=b=>viewport(b,true)+(b.vp?viewport(b,false):'');
+    const bs=[];
+    blocks.forEach(b=>{
+      bs.push(tags([[0,'BLOCK'],[5,b.begin],[330,b.record],[100,'AcDbEntity'],[8,'0'],[100,'AcDbBlockBegin'],[2,b.name],[70,0],...xyz(10,0,0),[3,b.name],[1,'']]));
+      if(b.index>1) bs.push(paperEntities(b));
+      bs.push(tags([[0,'ENDBLK'],[5,b.end],[330,b.record],[100,'AcDbEntity'],[8,'0'],[100,'AcDbBlockEnd']]));
+    });
+    const es=[];
+    primitives(scene(p)).forEach(e=>{
+      const type=e.type==='path'?'LWPOLYLINE':e.type==='fill'?'HATCH':e.type.toUpperCase();
+      let data=base(type,handle(),model.record,e.layer,null);
+      if(Number.isInteger(e.colorIndex)&&Math.abs(e.colorIndex)>0&&Math.abs(e.colorIndex)<256)data.push([62,Math.abs(e.colorIndex)]);
+      if(e.type==='line')data.push([100,'AcDbLine'],...xyz(10,e.x1,e.y1),...xyz(11,e.x2,e.y2));
+      else if(e.type==='circle'||e.type==='arc'){
+        data.push([100,'AcDbCircle'],...xyz(10,e.x,e.y),[40,e.r]);
+        if(e.type==='arc')data.push([100,'AcDbArc'],[50,((e.start%360)+360)%360],[51,((e.end%360)+360)%360]);
+      } else if(e.type==='path') {
+        data.push([100,'AcDbPolyline'],[90,e.points.length],[70,e.closed?1:0]);
+        e.points.forEach(pt=>data.push([10,pt.x],[20,pt.y]));
+      } else if(e.type==='fill') {
+        data.push([100,'AcDbHatch'],...xyz(10,0,0),...xyz(210,0,0,1),[2,'SOLID'],[70,1],[71,0],[91,e.loops.length]);
+        e.loops.forEach(l=>{data.push([92,2],[72,0],[73,1],[93,l.length]);l.forEach(pt=>data.push([10,pt.x],[20,pt.y]));data.push([97,0]);});
+        data.push([75,0],[76,1],[98,0]);
+      } else data.push([100,'AcDbText'],...xyz(10,e.x,e.y),[40,e.h],[1,ascii(e.text)],[50,finite(e.angle,0)],[41,finite(e.widthFactor,1)],[51,0],[7,'Standard'],[71,0],[72,e.halign||0],...xyz(11,e.x,e.y),[100,'AcDbText'],[73,e.valign||0]);
+      es.push(tags(data));
+    });
+    es.push(paperEntities(blocks[1]));
+    function dict(h,owner,entries) {return tags([[0,'DICTIONARY'],[5,h],[330,owner],[100,'AcDbDictionary'],[280,0],[281,1],...entries.flatMap(([name,ref])=>[[3,name],[350,ref]])]);}
+    const os=[dict(rootH,'0',[['ACAD_GROUP',groupDict],['ACAD_LAYOUT',layoutDict],['ACAD_PLOTSETTINGS',plotDict]]),dict(groupDict,rootH,[]),dict(plotDict,rootH,[]),dict(layoutDict,rootH,blocks.map(b=>[b.layout,b.object]))];
+    blocks.forEach(b=>{
+      os.push(tags([[0,'LAYOUT'],[5,b.object],[330,layoutDict],[100,'AcDbPlotSettings'],[1,''],[2,''],[4,'PageBuilder_('+num(W)+'_x_'+num(H)+'_MM)'],[6,''],
+        [40,0],[41,0],[42,0],[43,0],[44,W],[45,H],[46,0],[47,0],[48,0],[49,0],[140,0],[141,0],[142,1],[143,1],
+        [70,b.index?672:1024],[72,1],[73,0],[74,5],[7,''],[75,16],[76,0],[77,2],[78,300],[147,1],[148,0],[149,0],
+        [100,'AcDbLayout'],[1,b.layout],[70,1],[71,b.index],[10,0],[20,0],[11,b.index?W:totalW],[21,H],...xyz(12,0,0),
+        ...xyz(14,0,0),...xyz(15,b.index?W:totalW,H),[146,0],...xyz(13,0,0),...xyz(16,1,0),...xyz(17,0,1),[76,1],[330,b.record],...(b.index?[[331,b.main]]:[])]));
+    });
+    const header=tags([[9,'$ACADVER'],[1,'AC1015'],[9,'$ACADMAINTVER'],[70,6],[9,'$DWGCODEPAGE'],[3,'ANSI_1252'],[9,'$HANDSEED'],[5,next.toString(16).toUpperCase()],
+      [9,'$INSBASE'],...xyz(10,0,0),[9,'$EXTMIN'],...xyz(10,0,0),[9,'$EXTMAX'],...xyz(10,totalW,H),[9,'$LIMMIN'],[10,0],[20,0],[9,'$LIMMAX'],[10,totalW],[20,H],
+      [9,'$TILEMODE'],[70,1],[9,'$CTAB'],[1,'Model'],[9,'$INSUNITS'],[70,4],[9,'$MEASUREMENT'],[70,1],[9,'$LUNITS'],[70,2],[9,'$LUPREC'],[70,3],[9,'$TEXTSTYLE'],[7,'Standard'],[9,'$CLAYER'],[8,'SCHEMATIC']]);
+    return sec('HEADER',header)+sec('CLASSES','')+sec('TABLES',t.join(''))+sec('BLOCKS',bs.join(''))+sec('ENTITIES',es.join(''))+sec('OBJECTS',os.join(''))+tags([[0,'EOF']]);
+  }
+  function lisp(p) {
+    if(scene(p).some(e=>['arc','path','fill'].includes(e.type)||e.type==='text'&&(e.angle||e.halign||e.valign)))throw Error('Use DXF for imported curves, fills and rotated/aligned text. The LISP fallback is for basic drawings.');
+    const ls=s=>'"'+ascii(s).replace(/\\/g,'\\\\').replace(/"/g,'\\"')+'"';
+    const lines=[
+      '; Page Builder '+VERSION+' - MODEL-ONLY fallback. The DXF export includes Sheets.',
+      '; LoadApplication, select this file, then type BUILDWEBPAGES in an EMPTY drawing.',
+      '; Loading only defines the command. This file does not execute automatically.',
+      '(defun wpb2:make (data)',
+      '  (if (not (entmake data)) (progn (princ "\\nCould not create an entity.") (exit))))',
+      '(defun wpb2:layer (name plot)',
+      '  (if (not (tblsearch "LAYER" name))',
+      '    (wpb2:make (list \'(0 . "LAYER") \'(100 . "AcDbSymbolTableRecord")',
+      '      \'(100 . "AcDbLayerTableRecord") (cons 2 name) \'(70 . 0)',
+      '      \'(62 . 7) \'(6 . "Continuous") (cons 290 plot)))))',
+      '(defun c:BUILDWEBPAGES (/ *error* oldtile oldtab)',
+      '  (setq oldtile (getvar "TILEMODE") oldtab (getvar "CTAB"))',
+      '  (defun *error* (msg)',
+      '    (if (= oldtile 1) (setvar "TILEMODE" 1) (progn (setvar "TILEMODE" 0) (setvar "CTAB" oldtab)))',
+      '    (princ (strcat "\\nBUILDWEBPAGES stopped: " msg "\\nPartial geometry may remain. This command does not delete it.")) (princ))',
+      '  (if (ssget "_X" \'((410 . "Model")))',
+      '    (princ "\\nUse an empty test drawing. Nothing was added.")',
+      '    (progn',
+      '      (setvar "TILEMODE" 1)',
+      '      (wpb2:layer "PAGE-EDGE" 0) (wpb2:layer "PAGE-FRAME" 1) (wpb2:layer "SCHEMATIC" 1)'
+    ];
+    for(const e of primitives(scene(p))) {
+      let body=`(0 . ${ls(e.type.toUpperCase())}) (8 . ${ls(e.layer)}) (67 . 0) (410 . "Model") `;
+      if(e.type==='line')body+=`(10 ${num(e.x1)} ${num(e.y1)} 0.0) (11 ${num(e.x2)} ${num(e.y2)} 0.0)`;
+      else if(e.type==='circle')body+=`(10 ${num(e.x)} ${num(e.y)} 0.0) (40 . ${num(e.r)})`;
+      else body+=`(10 ${num(e.x)} ${num(e.y)} 0.0) (40 . ${num(e.h)}) (1 . ${ls(e.text)}) (7 . "Standard")`;
+      lines.push("      (wpb2:make '("+body+'))');
+    }
+    lines.push('      (command "_ZoomFit")','      (princ "\\nModel pages created. For linked Sheet tabs, use the browser DXF export.")','    )','  )','  (princ)',' )',
+      '(princ "\\nLoaded: BUILDWEBPAGES (empty drawing, Model-only fallback)")','(princ)');
+    return lines.join('\n')+'\n';
+  }
+  const api={VERSION,TEXT_EM,ink,shapePath,textYOffset,clone,uid,num,finite,text,presets,entity,defaults,newPage,newProject,sampleProject,validateProject,vars,origin,moved,scene,primitives,ascii,svg,dxf,lisp};
+  root.PageBuilderCore=api;
+  if(typeof module!=='undefined'&&module.exports)module.exports=api;
+})(typeof globalThis!=='undefined'?globalThis:this);
+
+
+</script>
+<script id="cad-import-adapter">
+/* Page Builder CAD import adapter. Original code for this application.
+ * Decoder data schema: @mlightcad/libredwg-web 0.7.x.
+ * This adapter never writes the source drawing and never makes network requests.
+ * Unsupported entities and approximations are collected in a report.
+ */
+(function(root){
+'use strict';
+const TAU=Math.PI*2, DEG=180/Math.PI, LIMIT=60000;
+const number=(v,d=0)=>Number.isFinite(Number(v))?Number(v):d;
+const point=p=>Array.isArray(p)?{x:number(p[0]),y:number(p[1]),z:number(p[2])}:{x:number(p&&p.x),y:number(p&&p.y),z:number(p&&p.z)};
+const identity=[1,0,0,1,0,0];
+const entries=t=>Array.isArray(t)?t:(t&&Array.isArray(t.entries)?t.entries:[]);
+const apply=(m,p)=>({x:m[0]*p.x+m[2]*p.y+m[4],y:m[1]*p.x+m[3]*p.y+m[5]});
+function multiply(a,b){return [a[0]*b[0]+a[2]*b[1],a[1]*b[0]+a[3]*b[1],a[0]*b[2]+a[2]*b[3],a[1]*b[2]+a[3]*b[3],a[0]*b[4]+a[2]*b[5]+a[4],a[1]*b[4]+a[3]*b[5]+a[5]];}
+function rotation(a,x=0,y=0,sx=1,sy=1){const c=Math.cos(a),s=Math.sin(a);return [c*sx,s*sx,-s*sy,c*sy,x,y];}
+function scalar(m){const x=Math.hypot(m[0],m[1]),y=Math.hypot(m[2],m[3]);return {x,y,uniform:Math.abs(x-y)<1e-8*Math.max(1,x,y)&&Math.abs(m[0]*m[2]+m[1]*m[3])<1e-8*Math.max(1,x*y),det:m[0]*m[3]-m[1]*m[2]};}
+function angleSweep(a,b,ccw=true){let d=ccw?b-a:a-b;while(d<0)d+=TAU;return Math.abs(d)<1e-10?TAU:Math.min(d,TAU);}
+const unitTable={1:['inches',25.4],2:['feet',304.8],4:['millimetres',1],5:['centimetres',10],6:['metres',1000],7:['kilometres',1e6],8:['microinches',0.0000254],9:['mils',0.0254],10:['yards',914.4],11:['angstroms',1e-7],12:['nanometres',1e-6],13:['microns',0.001],14:['decimetres',100],15:['decametres',10000],16:['hectometres',100000],21:['US survey feet',1200000/3937]};
+function plainText(s){
+ return String(s==null?'':s).replace(/\\U\+([0-9a-fA-F]{4})/g,(_,h)=>String.fromCharCode(parseInt(h,16)))
+ .replace(/%%d/gi,'\u00b0').replace(/%%p/gi,'\u00b1').replace(/%%c/gi,'\u2300')
+ .replace(/\\P/g,'\n').replace(/\\~/g,' ').replace(/\\[LlOoKk]/g,'')
+ .replace(/\\S([^;]*);/g,(_,v)=>v.replace(/[\^#]/g,'/'))
+ .replace(/\\[ACcFfHhQqTtWwpa][^;]*;/g,'').replace(/[{}]/g,'').replace(/\\([\\{}])/g,'$1');
+}
+function decodeDatabase(db,options={}){
+ if(!db||!Array.isArray(db.entities))throw Error('The DWG reader returned an unrecognized database. Save the diagnostic JSON so the adapter can be updated.');
+ const report={sourceName:options.name||'Drawing',sourceEntityTypes:{},expandedEntityTypes:{},skipped:{},approximated:{},notes:[],decoderStats:options.stats||{},decodedModelEntities:db.entities.length};
+ const bump=(obj,key,n=1)=>obj[key]=(obj[key]||0)+n;
+ const skipped=(reason,e)=>{bump(report.skipped,reason);if(e&&report.examples===undefined)report.examples=[];if(e&&report.examples.length<30)report.examples.push({type:e.type,handle:e.handle,reason});};
+ const approximation=reason=>bump(report.approximated,reason);
+ const layers=new Map(entries(db.tables&&db.tables.LAYER).map(x=>[x.name,x]));
+ const blocks=new Map(entries(db.tables&&db.tables.BLOCK_RECORD).map(x=>[x.name,x]));
+ const blockRecords=entries(db.tables&&db.tables.BLOCK_RECORD);
+ const modelRecord=blockRecords.find(b=>/^\*?model_space$/i.test(b.name));
+ const paperRecords=blockRecords.filter(b=>/^\*?paper_space/i.test(b.name));
+ const paperOwners=new Set(paperRecords.map(b=>b.handle).filter(Boolean));
+ const paperEntityHandles=new Set(paperRecords.flatMap(b=>(b.entities||[]).flatMap(e=>[e.handle,...(e.attribs||[]).map(a=>a.handle)])).filter(Boolean));
+ // LibreDWG-Web's entity list can include paper-space objects without an isInPaperSpace flag.
+ // Prefer the actual Model block ownership list; otherwise classify by owner handles.
+ const source=modelRecord&&modelRecord.entities&&modelRecord.entities.length?modelRecord.entities:db.entities;
+ report.decodedModelEntities=source.filter(e=>!e.isInPaperSpace&&!paperOwners.has(e.ownerBlockRecordSoftId)&&!paperEntityHandles.has(e.handle)).length;
+ if(paperRecords.length)report.skipped['Paper-space definitions (Model import only)']=paperRecords.reduce((n,b)=>n+(b.entities||[]).length,0);
+ const attachedRootHandles=new Set(source.filter(e=>e.type==='INSERT').flatMap(e=>(e.attribs||[]).map(a=>a.handle)).filter(Boolean));
+ const output=[];
+ if(number(report.decoderStats.unknownEntityCount)>0)report.skipped['Entities not described by the DWG decoder']=report.decoderStats.unknownEntityCount;
+ function emit(type,props,source,layer){
+  if(output.length>=LIMIT)throw Error('Import would exceed '+LIMIT+' objects. The current project has not been changed.');
+  const e={id:'imp_'+output.length,type,...props,layer:layer||source.layer||'0',literal:true,sourceType:source.type,sourceHandle:String(source.handle||'')};
+  if(Number.isInteger(source.colorIndex))e.colorIndex=source.colorIndex;
+  if(Number.isInteger(source.color)&&source.color>=0&&source.color<=0xffffff)e.trueColor=source.color;
+  const ly=layers.get(e.layer);
+  if((e.colorIndex===undefined||e.colorIndex===256)&&ly)e.colorIndex=ly.colorIndex;
+  if(e.trueColor===undefined&&ly&&Number.isInteger(ly.color)&&ly.color>0)e.trueColor=ly.color;
+  if(source.lineType&& !/^(bylayer|byblock|continuous)$/i.test(source.lineType))e.sourceLineType=source.lineType;
+  else if(ly&&ly.lineType&&!/^continuous$/i.test(ly.lineType))e.sourceLineType=ly.lineType;
+  output.push(e);
+ }
+ function line(a,b,m,e,layer){a=apply(m,point(a));b=apply(m,point(b));emit('line',{x1:a.x,y1:a.y,x2:b.x,y2:b.y},e,layer);}
+ function path(points,m,e,layer,closed=false){if(points.length<2){skipped('Empty or degenerate curve',e);return;}emit('path',{points:points.map(p=>apply(m,point(p))),closed},e,layer);}
+ function arc(center,r,a,b,m,e,layer,ccw=true){
+  center=point(center);r=Math.abs(number(r));if(!r){skipped('Zero-radius arc',e);return;}
+  const sc=scalar(m),sweep=angleSweep(a,b,ccw);
+  if(sc.uniform){const c=apply(m,center),p1=apply(m,{x:center.x+r*Math.cos(a),y:center.y+r*Math.sin(a)}),p2=apply(m,{x:center.x+r*Math.cos(b),y:center.y+r*Math.sin(b)});
+   if(sweep>TAU-1e-8)emit('circle',{x:c.x,y:c.y,r:r*sc.x},e,layer);
+   else {let start=Math.atan2(p1.y-c.y,p1.x-c.x)*DEG,end=Math.atan2(p2.y-c.y,p2.x-c.x)*DEG;if((sc.det<0)===ccw)[start,end]=[end,start];emit('arc',{x:c.x,y:c.y,r:r*sc.x,start,end},e,layer);}return;
+  }
+  approximation('Non-uniformly scaled arcs/circles converted to polylines');
+  const n=Math.max(12,Math.min(720,Math.ceil(sweep/(Math.PI/90)))),ps=[];
+  for(let i=0;i<=n;i++){const t=a+(ccw?1:-1)*sweep*i/n;ps.push({x:center.x+r*Math.cos(t),y:center.y+r*Math.sin(t)});}path(ps,m,e,layer,sweep>TAU-1e-8);
+ }
+ function poly(vertices,closed,m,e,layer){
+  if(!vertices||vertices.length<2){skipped('Empty polyline',e);return;}
+  const hasBulge=vertices.some(v=>Math.abs(number(v.bulge))>1e-10);
+  if(!hasBulge){path(vertices.map(v=>v.position||v.point||v),m,e,layer,closed);return;}
+  approximation('Bulged polylines split into editable lines/arcs');
+  const n=vertices.length;
+  for(let i=0;i<n-(closed?0:1);i++){
+   const a=point(vertices[i].position||vertices[i]),b=point(vertices[(i+1)%n].position||vertices[(i+1)%n]),bulge=number(vertices[i].bulge);
+   if(Math.abs(bulge)<1e-10){line(a,b,m,e,layer);continue;}
+   const dx=b.x-a.x,dy=b.y-a.y,chord=Math.hypot(dx,dy);if(!chord)continue;
+   const t=(1-bulge*bulge)/(4*bulge),c={x:(a.x+b.x)/2-dy*t,y:(a.y+b.y)/2+dx*t},r=chord*(1+bulge*bulge)/(4*Math.abs(bulge));
+   arc(c,r,Math.atan2(a.y-c.y,a.x-c.x),Math.atan2(b.y-c.y,b.x-c.x),m,e,layer,bulge>0);
+  }
+ }
+ function textEntity(e,m,layer){
+  const isM=e.type==='MTEXT',v=e.type==='ATTRIB'||e.type==='ATTDEF'?(typeof e.text==='object'?e.text:{...e,text:e.text||e.defaultValue||''}):e;
+  if((e.type==='ATTRIB'||e.type==='ATTDEF')&&(number(e.flags)&1)){skipped('Invisible attributes',e);return;}
+  const raw=v.text==null?'':v.text,content=isM?plainText(raw):String(raw).replace(/\\U\+([0-9a-fA-F]{4})/g,(_,h)=>String.fromCharCode(parseInt(h,16))).replace(/%%d/gi,'\u00b0').replace(/%%p/gi,'\u00b1').replace(/%%c/gi,'\u2300');
+  const h=number(v.textHeight||v.height,2.5);if(!(h>0))return;
+  const a=isM&&v.direction&&Math.hypot(number(v.direction.x),number(v.direction.y))>1e-9?Math.atan2(v.direction.y,v.direction.x):number(v.rotation),dx={x:Math.cos(a),y:Math.sin(a)},dy={x:-Math.sin(a),y:Math.cos(a)};
+  const sx=Math.hypot(m[0]*dx.x+m[2]*dx.y,m[1]*dx.x+m[3]*dx.y),sy=Math.hypot(m[0]*dy.x+m[2]*dy.y,m[1]*dy.x+m[3]*dy.y);
+  const angle=Math.atan2(m[1]*dx.x+m[3]*dx.y,m[0]*dx.x+m[2]*dx.y)*DEG;
+  let pos=point(isM?v.insertionPoint:v.startPoint||v.insertionPoint),halign=number(v.halign),valign=number(v.valign);
+  if(!isM&&(halign||valign)&&v.endPoint)pos=point(v.endPoint);
+  if(halign>2){halign=0;approximation('Aligned/fitted text approximated using its stored height and width');}
+  if(isM){approximation('MTEXT formatting/wrapping simplified to editable text lines');const attach=Math.max(1,number(v.attachmentPoint,1));halign=(attach-1)%3;valign=0;
+   const ls=content.split('\n'),pitch=h*1.667*number(v.lineSpacing,1),height=ls.length*pitch;
+   let offset=attach<=3?-h:attach<=6?height/2-h:height-h;
+   ls.forEach((s,i)=>{const pp=apply(m,{x:pos.x+dy.x*(offset-i*pitch),y:pos.y+dy.y*(offset-i*pitch)});emit('text',{...pp,h:h*sy,text:s,angle,widthFactor:sx/Math.max(sy,1e-9),halign,valign:0},e,layer);});
+  }else{const p=apply(m,pos);emit('text',{...p,h:h*sy,text:content,angle,widthFactor:number(v.xScale,1)*sx/Math.max(sy,1e-9),halign,valign},e,layer);}
+  if(number(v.obliqueAngle))approximation('Oblique text displayed without slant');
+  if(number(v.generationFlag)||scalar(m).det<0)approximation('Mirrored text displayed readable; verify placement');
+ }
+ function flat(e,m=identity,layer='0',stack=[]){
+  if(!e||!e.type)return;
+  bump(report.expandedEntityTypes,e.type);
+  layer=e.layer&&e.layer!=='0'?e.layer:layer;
+  const ly=layers.get(layer);
+  if(!options.includeHidden&&ly&&(ly.off||ly.frozen||number(ly.colorIndex,7)<0)){skipped('Entities on off/frozen layers',e);return;}
+  if(e.isVisible===false&&!options.includeHidden){skipped('Hidden entities',e);return;}
+  const ex=e.extrusionDirection||e.normal;
+  if(ex&&(Math.abs(number(ex.x))>1e-8||Math.abs(number(ex.y))>1e-8)){skipped('Non-XY entity (3D projection not supported)',e);return;}
+  const original=m;
+  if(ex&&number(ex.z,1)<0&&!['LINE','ELLIPSE','SPLINE','MTEXT'].includes(e.type))m=multiply(m,[-1,0,0,1,0,0]);
+  try{
+   switch(e.type){
+    case 'LINE':line(e.startPoint,e.endPoint,m,e,layer);break;
+    case 'CIRCLE':arc(e.center,e.radius,0,TAU,m,e,layer);break;
+    case 'ARC':arc(e.center,e.radius,number(e.startAngle),number(e.endAngle),m,e,layer);break;
+    case 'TEXT':case 'MTEXT':case 'ATTRIB':textEntity(e,m,layer);break;
+    case 'ATTDEF':if(number(e.flags)&2)textEntity(e,m,layer);else bump(report.skipped,'Nonconstant attribute definitions (instance attributes used)');break;
+    case 'LWPOLYLINE':poly(e.vertices,!!(number(e.flag)&512)||e.closed===true,m,e,layer);if(e.constantWidth||e.vertices.some(v=>v.startWidth||v.endWidth))approximation('Polyline widths simplified to centreline strokes');break;
+    case 'POLYLINE':case 'POLYLINE_2D':case 'POLYLINE_3D':case 'POLYLINE2D':case 'POLYLINE3D':poly(e.vertices||e.points,!!(number(e.flag)&1),m,e,layer);break;
+    case 'INSERT':case 'MINSERT':{
+     const b=blocks.get(e.name);if(!b){skipped('Missing block definition: '+e.name,e);break;}
+     if(stack.includes(e.name)||stack.length>30){skipped('Recursive or overly nested block: '+e.name,e);break;}
+     const base=point(b.basePoint),pos=point(e.insertionPoint),angle=number(e.rotation),sx=number(e.xScale,1),sy=number(e.yScale,1);
+     const rows=Math.max(1,number(e.rowCount,1)),cols=Math.max(1,number(e.columnCount,1));
+     if(rows*cols>10000)throw Error('Block array is too large.');
+     for(let row=0;row<rows;row++)for(let col=0;col<cols;col++){
+      const rr=rotation(angle,pos.x,pos.y),off=[sx,0,0,sy,col*number(e.columnSpacing)-sx*base.x,row*number(e.rowSpacing)-sy*base.y],mat=multiply(m,multiply(rr,off));
+      (b.entities||[]).forEach(child=>flat(child,mat,layer,[...stack,e.name]));
+     }
+     // Attached attribute coordinates are in the containing space, not block-local.
+     (e.attribs||[]).forEach(a=>flat(a,original,layer,stack));
+     approximation('Block references expanded to editable geometry');
+     if((number(b.flags)&12)&&!(b.entities||[]).length)skipped('Unresolved external drawing reference: '+e.name,e);
+     break;
+    }
+    case 'DIMENSION':{
+     const b=blocks.get(e.name);if(b&&b.entities&&b.entities.length){b.entities.forEach(ch=>flat(ch,m,layer,[...stack,e.name]));approximation('Dimensions imported as static geometry/text');}else skipped('Dimension without a cached block picture',e);break;
+    }
+    case 'ELLIPSE':{
+     const c=point(e.center),v=point(e.majorAxisEndPoint),ratio=number(e.axisRatio,1),a=number(e.startAngle),sweep=angleSweep(a,number(e.endAngle,TAU)),n=Math.max(24,Math.ceil(sweep/(Math.PI/90))),ps=[];
+     for(let i=0;i<=n;i++){const t=a+sweep*i/n;ps.push({x:c.x+v.x*Math.cos(t)-v.y*ratio*Math.sin(t),y:c.y+v.y*Math.cos(t)+v.x*ratio*Math.sin(t)});}path(ps,m,e,layer,sweep>TAU-1e-8);approximation('Ellipses sampled to editable polylines (2-degree steps)');break;
+    }
+    case 'SPLINE':{
+     const ps=e.controlPoints||[],ks=e.knots||[],deg=number(e.degree,3),ws=e.weights||[];
+     if(ps.length<=deg||ks.length!==ps.length+deg+1){skipped('Spline without valid control points/knots',e);break;}
+     function value(u){let k=deg;while(k<ps.length-1&&u>=ks[k+1])k++;const d=[];for(let j=0;j<=deg;j++){const i=k-deg+j,p=point(ps[i]),w=number(ws[i],1);d[j]=[p.x*w,p.y*w,w];}for(let r=1;r<=deg;r++)for(let j=deg;j>=r;j--){const i=k-deg+j,den=ks[i+deg-r+1]-ks[i],a=den?(u-ks[i])/den:0;d[j]=d[j].map((v,t)=>(1-a)*d[j-1][t]+a*v);}return{x:d[deg][0]/d[deg][2],y:d[deg][1]/d[deg][2]};}
+     const start=ks[deg],end=ks[ps.length],n=Math.min(1000,Math.max(60,ps.length*12)),out=[];for(let i=0;i<=n;i++)out.push(value(start+(end-start)*i/n));path(out,m,e,layer,!!(number(e.flag)&1));approximation('Splines sampled to editable polylines');break;
+    }
+    case 'SOLID':case 'TRACE':{
+     let ps=[e.corner1,e.corner2,e.corner4||e.corner3,e.corner3].map(point);emit('fill',{loops:[ps.map(p=>apply(m,p))]},e,layer);break;
+    }
+    case 'HATCH':{
+     const loops=[];
+     for(const p of e.boundaryPaths||[]){let ps=[];if(p.vertices){const verts=p.vertices;for(let i=0;i<verts.length;i++){const v=verts[i],w=verts[(i+1)%verts.length],a=point(v),b=point(w),bulge=number(v.bulge);ps.push(a);if(Math.abs(bulge)>1e-9){const dx=b.x-a.x,dy=b.y-a.y,t=(1-bulge*bulge)/(4*bulge),c={x:(a.x+b.x)/2-dy*t,y:(a.y+b.y)/2+dx*t},r=Math.hypot(a.x-c.x,a.y-c.y),start=Math.atan2(a.y-c.y,a.x-c.x),sweep=4*Math.atan(bulge);for(let j=1;j<24;j++){const q=start+sweep*j/24;ps.push({x:c.x+r*Math.cos(q),y:c.y+r*Math.sin(q)});}}}}
+      else for(const edge of p.edges||[]){if(edge.type===1){ps.push(point(edge.start),point(edge.end));}else if(edge.type===2){const c=point(edge.center),a=number(edge.startAngle),sw=angleSweep(a,number(edge.endAngle),edge.isCCW!==false),n=Math.max(12,Math.ceil(sw/(Math.PI/90)));for(let i=0;i<=n;i++){const q=a+(edge.isCCW===false?-1:1)*sw*i/n;ps.push({x:c.x+edge.radius*Math.cos(q),y:c.y+edge.radius*Math.sin(q)});}}else{skipped('Unsupported hatch boundary edge',e);ps=[];break;}}
+      if(ps.length>2)loops.push(ps.map(p=>apply(m,p)));
+     }
+     if(!loops.length){skipped('Hatch without supported boundary',e);break;}
+     if(e.solidFill===1)emit('fill',{loops},e,layer);
+     else {loops.forEach(points=>emit('path',{points,closed:true},e,layer));approximation('Pattern hatches imported as outlines only');}
+     if(e.boundaryPaths.some(p=>p.edges||p.vertices&&p.vertices.some(v=>v.bulge)))approximation('Curved hatch boundaries sampled');break;
+    }
+    case 'LEADER':path(e.vertices||[],m,e,layer);approximation('Leader arrowheads/associations not reconstructed');break;
+    case 'VIEWPORT':case 'SEQEND':case 'VERTEX':case 'BLOCK':case 'ENDBLK':break;
+    default:skipped('Unsupported '+e.type,e);
+   }
+  }catch(err){if(output.length>=LIMIT)throw err;skipped('Could not translate '+e.type+': '+err.message,e);}
+ }
+ for(const e of source){bump(report.sourceEntityTypes,e.type||'unknown');if(e.isInPaperSpace||paperOwners.has(e.ownerBlockRecordSoftId)||paperEntityHandles.has(e.handle)){bump(report.skipped,'Paper-space entities (Model import only)');continue;}if(e.type==='ATTRIB'&&e.handle&&attachedRootHandles.has(e.handle))continue;flat(e);}
+ if(!output.length)throw Error('No supported visible Model geometry was found. This importer does not yet reconstruct paper-space-only drawings.');
+ // Reject bad numeric geometry instead of allowing it to break the canvas/exporter.
+ const valid=output.filter(e=>{const vals=e.type==='line'?[e.x1,e.y1,e.x2,e.y2]:e.type==='path'?e.points.flatMap(p=>[p.x,p.y]):e.type==='fill'?e.loops.flatMap(l=>l.flatMap(p=>[p.x,p.y])):[e.x,e.y,e.h||e.r];if(vals.some(v=>!Number.isFinite(v))){skipped('Invalid numeric geometry',e);return false;}return true;});
+ const unitCode=number(db.header&&(db.header.INSUNITS??db.header.$INSUNITS)),unit=unitTable[unitCode];
+ report.unitCode=unitCode;report.unitName=unit?unit[0]:'unspecified';report.suggestedScale=unit?unit[1]:null;
+ report.layoutNames=(db.objects&&db.objects.LAYOUT||[]).map(x=>x.layoutName||x.name).filter(Boolean);
+ report.importedObjects=valid.length;
+ report.notes.push('This first importer brings the entire Model into one editing canvas. Original relative positions are retained; existing Sheet tabs/viewports are not reconstructed.');
+ report.notes.push('Existing title-block lettering is imported as literal editable text, not automatically bound to page variables.');
+ report.notes.push('Fonts are substituted with Arial in the browser and Standard in DXF. Verify text fit. Original line patterns/weights are not fully reproduced.');
+ if(Object.keys(report.skipped).length)report.notes.push('Review all skipped items before using this import as a complete drawing.');
+ return {entities:valid,report};
+}
+function bounds(es){
+ let xmin=Infinity,ymin=Infinity,xmax=-Infinity,ymax=-Infinity;
+ function add(x,y){if(!Number.isFinite(x)||!Number.isFinite(y))return;xmin=Math.min(xmin,x);ymin=Math.min(ymin,y);xmax=Math.max(xmax,x);ymax=Math.max(ymax,y);}
+ for(const e of es){
+  if(e.type==='line'||e.type==='rect'){add(e.x1,e.y1);add(e.x2,e.y2);}
+  else if(e.type==='circle'||e.type==='arc'){add(e.x-e.r,e.y-e.r);add(e.x+e.r,e.y+e.r);}
+  else if(e.type==='path')e.points.forEach(p=>add(p.x,p.y));
+  else if(e.type==='fill')e.loops.forEach(l=>l.forEach(p=>add(p.x,p.y)));
+  else {const w=String(e.text).length*e.h*0.95*number(e.widthFactor,1),a=number(e.angle)/DEG,c=Math.cos(a),s=Math.sin(a),left=e.halign===1?-w/2:e.halign===2?-w:0,low=e.valign===3?-e.h:e.valign===2?-e.h/2:-e.h*.2;[[left,low],[left+w,low],[left,low+e.h*1.2],[left+w,low+e.h*1.2]].forEach(([x,y])=>add(e.x+c*x-s*y,e.y+s*x+c*y));}
+ }
+ if(xmin===Infinity)return{x:0,y:0,w:0,h:0};return{x:xmin,y:ymin,w:xmax-xmin,h:ymax-ymin};
+}
+function makeProject(decoded,base,scale){
+ scale=Number(scale);if(!Number.isFinite(scale)||scale<=0||scale>1e6)throw Error('Choose a positive millimetres-per-drawing-unit value.');
+ const p=JSON.parse(JSON.stringify(base)),b=bounds(decoded.entities),pad=10;
+ const map=p=>({x:(p.x-b.x)*scale+pad,y:(p.y-b.y)*scale+pad});
+ const entities=decoded.entities.map((e,i)=>{e=JSON.parse(JSON.stringify(e));e.id='import_'+i+'_'+Date.now().toString(36);
+  if(e.type==='line'||e.type==='rect'){const a=map({x:e.x1,y:e.y1}),b=map({x:e.x2,y:e.y2});e.x1=a.x;e.y1=a.y;e.x2=b.x;e.y2=b.y;}
+  else if(e.type==='path')e.points=e.points.map(map);
+  else if(e.type==='fill')e.loops=e.loops.map(l=>l.map(map));
+  else {Object.assign(e,map(e));if(e.r)e.r*=scale;if(e.h)e.h*=scale;}
+  return e;
+ });
+ const width=Math.max(50,b.w*scale+2*pad),height=Math.max(50,b.h*scale+2*pad);
+ if(width>1e6||height>1e6)throw Error('Resulting drawing is too large. Check the import units.');
+ p.version=3;p.paper={preset:'custom',orientation:width>height?'landscape':'portrait',width,height};p.margin=0;
+ // Keep the user's template definition but do not stamp a second title block over imported content.
+ p.titleBlock.enabled=false;
+ p.pages=[{id:'page_import_'+Date.now().toString(36),title:decoded.report.sourceName.replace(/\.(dwg|dxf|json)$/i,''),number:'',revision:'',entities,frame:false}];
+ p.importInfo={...decoded.report,mmPerSourceUnit:scale,sourceOrigin:{x:b.x,y:b.y},translationMm:{x:pad-b.x*scale,y:pad-b.y*scale},modelBoundsSourceUnits:b};
+ return p;
+}
+// A small ASCII DXF front end produces the same typed database used by the DWG adapter.
+// Unknown records are kept by type so they can be reported, never silently ignored.
+function parseDXF(contents){
+ if(contents.startsWith('AutoCAD Binary DXF'))throw Error('Binary DXF is not supported; save as ASCII DXF.');
+ const lines=contents.replace(/^\ufeff/,'').split(/\r\n|\n|\r/),pairs=[];
+ for(let i=0;i+1<lines.length;i+=2){const c=Number(lines[i].trim());if(!Number.isInteger(c))throw Error('Invalid ASCII DXF group code at line '+(i+1));pairs.push([c,lines[i+1].trim()]);}
+ const header={},records=[],blocks=[],layers=[],layouts=[];let section='',currentBlock=null,insert=null,poly=null;
+ const get=(a,c,d)=>{const p=a.find(t=>t[0]===c);return p?p[1]:d;},getn=(a,c,d=0)=>number(get(a,c,d),d);
+ const pt=(a,c)=>({x:getn(a,c),y:getn(a,c+10),z:getn(a,c+20)});
+ function convert(a){
+  const type=get(a,0,''),common={type,handle:get(a,5,''),layer:get(a,8,'0'),colorIndex:getn(a,62,256),isVisible:getn(a,60)===0,isInPaperSpace:getn(a,67)===1,lineType:get(a,6,'ByLayer')};
+  if(get(a,420)!==undefined)common.color=getn(a,420);
+  if(get(a,210)!==undefined)common.extrusionDirection=pt(a,210);
+  const pos=()=>pt(a,10);
+  switch(type){
+   case 'LINE':return{...common,startPoint:pos(),endPoint:pt(a,11)};
+   case 'ARC':case 'CIRCLE':return{...common,center:pos(),radius:getn(a,40),startAngle:getn(a,50)/DEG,endAngle:getn(a,51,360)/DEG};
+   case 'TEXT':case 'ATTRIB':case 'ATTDEF':{const t={text:get(a,1,''),startPoint:pos(),endPoint:pt(a,11),textHeight:getn(a,40,2.5),rotation:getn(a,50)/DEG,xScale:getn(a,41,1),halign:getn(a,72),valign:getn(a,type==='TEXT'?73:74),generationFlag:getn(a,71),obliqueAngle:getn(a,51)/DEG};return type==='TEXT'?{...common,...t}:{...common,text:t,flags:getn(a,70),tag:get(a,2,'')};}
+   case 'MTEXT':return{...common,insertionPoint:pos(),text:a.filter(t=>t[0]===1||t[0]===3).map(t=>t[1]).join(''),textHeight:getn(a,40),rectWidth:getn(a,41),rotation:get(a,50)!==undefined?getn(a,50)/DEG:Math.atan2(getn(a,21),getn(a,11,1)),attachmentPoint:getn(a,71,1),lineSpacing:getn(a,44,1)};
+   case 'INSERT':return{...common,name:get(a,2,''),insertionPoint:pos(),xScale:getn(a,41,1),yScale:getn(a,42,1),rotation:getn(a,50)/DEG,rowCount:getn(a,71,1),columnCount:getn(a,70,1),rowSpacing:getn(a,45),columnSpacing:getn(a,44),attribs:[]};
+   case 'DIMENSION':return{...common,name:get(a,2,'')};
+   case 'LWPOLYLINE':{const vertices=[];let v;for(const [c,s]of a){if(c===10){v={x:number(s),y:0,bulge:0};vertices.push(v);}else if(v&&c===20)v.y=number(s);else if(v&&c===42)v.bulge=number(s);}return{...common,vertices,flag:(getn(a,70)&1)?512:0,constantWidth:getn(a,43)};}
+   case 'POLYLINE':return{...common,vertices:[],flag:getn(a,70)};
+   case 'VERTEX':return{...pos(),bulge:getn(a,42)};
+   case 'ELLIPSE':return{...common,center:pos(),majorAxisEndPoint:pt(a,11),axisRatio:getn(a,40),startAngle:getn(a,41),endAngle:getn(a,42,TAU)};
+   case 'SOLID':case 'TRACE':return{...common,corner1:pos(),corner2:pt(a,11),corner3:pt(a,12),corner4:pt(a,13)};
+   case 'SPLINE':{const ps=[],knots=[],weights=[];let p;for(const [c,s]of a){if(c===10){p={x:number(s),y:0};ps.push(p);}else if(c===20&&p)p.y=number(s);else if(c===40)knots.push(number(s));else if(c===41)weights.push(number(s));}return{...common,degree:getn(a,71,3),controlPoints:ps,knots,weights,flag:getn(a,70)};}
+   case 'HATCH':{const paths=[];for(let j=0;j<a.length;j++)if(a[j][0]===92){const flag=number(a[j][1]),verts=[];let closed=true;if(!(flag&2))return common;let v;for(j++;j<a.length&&a[j][0]!==92&&a[j][0]!==97;j++){const [c,s]=a[j];if(c===73)closed=!!number(s);if(c===10){v={x:number(s),y:0,bulge:0};verts.push(v);}else if(c===20&&v)v.y=number(s);else if(c===42&&v)v.bulge=number(s);}paths.push({vertices:verts,isClosed:closed});j--;}return{...common,solidFill:getn(a,70),boundaryPaths:paths};}
+   default:return common;
+  }
+ }
+ for(let i=0;i<pairs.length;){
+  const [code,val]=pairs[i];
+  if(code===0&&val==='SECTION'){section=pairs[i+1]&&pairs[i+1][1];i+=2;continue;}
+  if(code===0&&val==='ENDSEC'){section='';i++;continue;}
+  if(section==='HEADER'&&code===9){header[val.replace(/^\$/,'')]=pairs[i+1]?pairs[i+1][1]:'';i+=2;continue;}
+  if(code!==0){i++;continue;}
+  let j=i+1;while(j<pairs.length&&pairs[j][0]!==0)j++;const a=pairs.slice(i,j);i=j;
+  if(section==='TABLES'&&val==='LAYER'){layers.push({name:get(a,2,'0'),colorIndex:getn(a,62,7),off:getn(a,62,7)<0,frozen:!!(getn(a,70)&1),lineType:get(a,6,'Continuous')});continue;}
+  if(section==='OBJECTS'&&val==='LAYOUT'){const names=a.filter(t=>t[0]===1);layouts.push({layoutName:names.length?names[names.length-1][1]:'',tabOrder:getn(a,71)});continue;}
+  if(section==='BLOCKS'){
+   if(val==='BLOCK'){currentBlock={name:get(a,2,''),basePoint:pt(a,10),flags:getn(a,70),entities:[]};blocks.push(currentBlock);insert=null;poly=null;continue;}
+   if(val==='ENDBLK'){currentBlock=null;insert=null;poly=null;continue;}
+   if(!currentBlock)continue;
+  }else if(section!=='ENTITIES')continue;
+  const out=currentBlock?currentBlock.entities:records,e=convert(a);
+  if(val==='VERTEX'&&poly){poly.vertices.push(e);continue;}
+  if(val==='ATTRIB'&&insert){insert.attribs.push(e);continue;}
+  if(val==='SEQEND'){insert=null;poly=null;continue;}
+  if(val==='INSERT')insert=e;else if(val!=='ATTRIB')insert=null;
+  if(val==='POLYLINE')poly=e;else if(val!=='VERTEX')poly=null;
+  // Paper-space blocks are not part of the Model entity stream.
+  out.push(e);
+ }
+ const model=blocks.find(b=>/^\*?model_space$/i.test(b.name));
+ if(!records.some(e=>!e.isInPaperSpace)&&model)records.push(...model.entities);
+ return {header,entities:records,tables:{BLOCK_RECORD:{entries:blocks},LAYER:{entries:layers}},objects:{LAYOUT:layouts}};
+}
+root.CadImport={decodeDatabase,parseDXF,makeProject,bounds,unitTable,plainText};
+if(typeof module!=='undefined'&&module.exports)module.exports=root.CadImport;
+})(typeof globalThis!=='undefined'?globalThis:this);
+
+</script>
+<script>
+
+/* Page Builder browser UI. Pointer events support both click-click and drag drawing. */
+(function () {
+ 'use strict';
+ const C=window.PageBuilderCore, $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+ if(!C) { $('bootError').textContent='Could not load core.js. Use the single-file HTML or keep the source files together.'; return; }
+ const canvas=$('canvas'), STORE='draftsight-page-builder-v3-import-beta';
+ let project=C.newProject(), selectedPageId=project.pages[0].id;
+ let mode='model',tool='select',selection=null,pending=null,pointer=null,moving=null,spaceDown=false;
+ let camera={x:-15,y:-230,w:310,h:240}, undo=[],redo=[],timer=null,backupTimer=null;
+ let grid=true,snap=true,step=1,restored=false,viewInitialized=false;
+ const measureCanvas=document.createElement('canvas'),measure=measureCanvas.getContext('2d');
+ try { const saved=localStorage.getItem(STORE); if(saved){project=C.validateProject(JSON.parse(saved));selectedPageId=project.pages[0].id;restored=true;} } catch (_) { /* Browser storage is optional, including for file:// usage. */ }
+ const page=()=>project.pages.find(p=>p.id===selectedPageId)||project.pages[0];
+ const pageIndex=()=>project.pages.indexOf(page());
+ function el(name,attrs={},value) {
+  const node=document.createElementNS(NS,name);Object.entries(attrs).forEach(([k,v])=>node.setAttribute(k,String(v)));if(value!==undefined)node.textContent=value;return node;
+ }
+ function toast(msg,error=false) {
+  clearTimeout(timer);$('toast').textContent=msg;$('toast').classList.toggle('error',error);$('toast').hidden=false;
+  timer=setTimeout(()=>$('toast').hidden=true,error?9000:4500);
+ }
+ function backup() {
+  clearTimeout(backupTimer);backupTimer=setTimeout(()=>{
+   try {localStorage.setItem(STORE,JSON.stringify(project));$('saveStatus').textContent='Browser backup saved';}
+   catch(_){$('saveStatus').textContent='Use Save project to keep your work';}
+  },180);
+ }
+ function change(fn,fitAfter=false) {
+  const before=JSON.stringify(project);
+  try {fn();} catch(e){project=JSON.parse(before);toast(e.message,true);render();return false;}
+  if(before!==JSON.stringify(project)){undo.push(before);if(undo.length>80)undo.shift();redo=[];backup();}
+  if(fitAfter)fit(false);render();return true;
+ }
+ function history(direction) {
+  const from=direction==='undo'?undo:redo,to=direction==='undo'?redo:undo;
+  if(!from.length)return;
+  to.push(JSON.stringify(project));project=JSON.parse(from.pop());
+  if(!project.pages.some(p=>p.id===selectedPageId))selectedPageId=project.pages[0].id;
+  selection=null;pending=null;moving=null;pointer=null;backup();fit(false);render();
+ }
+ function setInput(id,val){const n=$(id);if(document.activeElement!==n)n.value=val;}
+ function snapValue(n){return C.num(snap?Math.round(n/step)*step:n);}
+ function localPoint(target,world,clamp=true){
+  let x=snapValue(world.x-target.ox),y=snapValue(world.y);
+  if(clamp){x=Math.max(0,Math.min(target.width,x));y=Math.max(0,Math.min(target.height,y));}
+  return {x:C.num(x),y:C.num(y)};
+ }
+ function targetAt(world) {
+  if(mode==='title')return world.x>=0&&world.x<=project.titleBlock.width&&world.y>=0&&world.y<=project.titleBlock.height?
+   {scope:'title',id:null,ox:0,width:project.titleBlock.width,height:project.titleBlock.height}:null;
+  const pages=mode==='sheet'?[page()]:project.pages;
+  for(const p of pages) {
+   const i=project.pages.indexOf(p),ox=mode==='model'?C.origin(project,i).x:0;
+   if(world.x>=ox&&world.x<=ox+project.paper.width&&world.y>=0&&world.y<=project.paper.height)
+    return {scope:'page',id:p.id,ox,width:project.paper.width,height:project.paper.height};
+  }
+  return null;
+ }
+ function listFor(s){return s.scope==='title'?project.titleBlock.entities:(project.pages.find(p=>p.id===s.id)||page()).entities;}
+ function selectedEntity(){return selection?listFor(selection).find(e=>e.id===selection.entityId):null;}
+ function bounds() {
+  if(mode==='title')return {x:0,y:0,w:project.titleBlock.width,h:project.titleBlock.height};
+  return {x:0,y:0,w:mode==='sheet'?project.paper.width:project.pages.length*project.paper.width+(project.pages.length-1)*project.gap,h:project.paper.height};
+ }
+ function fit(draw=true) {
+  const b=bounds(),r=canvas.getBoundingClientRect(),aspect=Math.max(0.25,r.width/Math.max(1,r.height));
+  let w=b.w+Math.min(30,b.w*.12),h=b.h+Math.min(30,b.h*.25);
+  if(w/h<aspect)w=h*aspect;else h=w/aspect;
+  camera={x:b.x+b.w/2-w/2,y:-b.y-b.h/2-h/2,w,h};
+  viewInitialized=true;
+  if(draw)renderCanvas();
+ }
+ function zoom(factor,anchor=null) {
+  const r=canvas.getBoundingClientRect(),a=anchor||{x:camera.x+camera.w/2,y:camera.y+camera.h/2};
+  const newW=Math.max(10,Math.min(1e7,camera.w*factor)),f=newW/camera.w;
+  camera={x:a.x-(a.x-camera.x)*f,y:a.y-(a.y-camera.y)*f,w:newW,h:camera.h*f};
+  renderCanvas();
+ }
+ function toWorld(evt) {
+  const p=canvas.createSVGPoint();p.x=evt.clientX;p.y=evt.clientY;
+  const matrix=canvas.getScreenCTM();if(!matrix)return {x:0,y:0};
+  const q=p.matrixTransform(matrix.inverse());return {x:q.x,y:-q.y};
+ }
+ function pixelSize(){return camera.w/Math.max(1,canvas.getBoundingClientRect().width);}
+ function textWidth(e,value){measure.font='100px Arial';return measure.measureText(value===undefined?e.text:value).width*e.h*C.TEXT_EM/100;}
+ function entityBounds(e) {
+  if(e.type==='line'||e.type==='rect')return {x:Math.min(e.x1,e.x2),y:Math.min(e.y1,e.y2),w:Math.abs(e.x2-e.x1),h:Math.abs(e.y2-e.y1)};
+  if(e.type==='circle'||e.type==='arc')return {x:e.x-e.r,y:e.y-e.r,w:2*e.r,h:2*e.r};
+  if(e.type==='path'||e.type==='fill'||e.type==='text'&&(e.angle||e.halign||e.valign||e.widthFactor&&e.widthFactor!==1))return window.CadImport.bounds([e]);
+   const value=e.literal?e.text:C.vars(e.text,page(),pageIndex(),project.pages.length);return {x:e.x,y:e.y-e.h*.25,w:textWidth(e,value),h:e.h*1.2};
+ }
+ function distanceToLine(p,e) {
+  const dx=e.x2-e.x1,dy=e.y2-e.y1,denom=dx*dx+dy*dy;
+  const t=denom?Math.max(0,Math.min(1,((p.x-e.x1)*dx+(p.y-e.y1)*dy)/denom)):0;
+  return Math.hypot(p.x-e.x1-t*dx,p.y-e.y1-t*dy);
+ }
+ function hit(target,point) {
+  const entities=listFor(target),tol=pixelSize()*6;
+  for(let i=entities.length-1;i>=0;i--) {
+   const e=entities[i],b=entityBounds(e);
+   if(e.type==='line'&&distanceToLine(point,e)<=tol)return e;
+   if(e.type==='circle'&&Math.abs(Math.hypot(point.x-e.x,point.y-e.y)-e.r)<=tol)return e;
+   if(e.type==='rect'&&point.x>=b.x-tol&&point.x<=b.x+b.w+tol&&point.y>=b.y-tol&&point.y<=b.y+b.h+tol&&
+    (Math.abs(point.x-b.x)<=tol||Math.abs(point.x-b.x-b.w)<=tol||Math.abs(point.y-b.y)<=tol||Math.abs(point.y-b.y-b.h)<=tol))return e;
+    if(e.type==='arc') {
+      const a=Math.atan2(point.y-e.y,point.x-e.x)*180/Math.PI,d=((e.end-e.start)%360+360)%360,t=((a-e.start)%360+360)%360;
+      if(Math.abs(Math.hypot(point.x-e.x,point.y-e.y)-e.r)<=tol&&t<=d+1)return e;
+    }
+    if(e.type==='path'||e.type==='fill') {
+      const loops=e.type==='path'?[e.points]:e.loops;
+      for(const l of loops)for(let j=0;j<l.length-((e.closed||e.type==='fill')?0:1);j++){
+        const a=l[j],b=l[(j+1)%l.length];if(distanceToLine(point,{x1:a.x,y1:a.y,x2:b.x,y2:b.y})<=tol)return e;
+      }
+      if(e.type==='fill') {
+        let inside=false;
+        for(const l of loops)for(let j=0,k=l.length-1;j<l.length;k=j++)if((l[j].y>point.y)!==(l[k].y>point.y)&&point.x<(l[k].x-l[j].x)*(point.y-l[j].y)/(l[k].y-l[j].y)+l[j].x)inside=!inside;
+        if(inside)return e;
+      }
+    }
+   if(e.type==='text'&&point.x>=b.x-tol&&point.x<=b.x+b.w+tol&&point.y>=b.y-tol&&point.y<=b.y+b.h+tol)return e;
+  }
+  return null;
+ }
+ function renderEntity(parent,e,ox=0,settings={}) {
+  const color=settings.selected?'#136fcc':settings.preview?'#136fcc':(settings.color||C.ink(e));
+  const attrs={stroke:color,'stroke-width':settings.selected||settings.preview?Math.max(.3,pixelSize()*1.6):.3,fill:'none','pointer-events':'none'};
+  if(settings.preview)attrs['stroke-dasharray']=`${pixelSize()*5} ${pixelSize()*3}`;
+  let node;
+  if(e.type==='line')node=el('line',{...attrs,x1:e.x1+ox,y1:-e.y1,x2:e.x2+ox,y2:-e.y2});
+  else if(e.type==='rect')node=el('rect',{...attrs,x:ox+Math.min(e.x1,e.x2),y:-Math.max(e.y1,e.y2),width:Math.abs(e.x2-e.x1),height:Math.abs(e.y2-e.y1)});
+  else if(e.type==='circle')node=el('circle',{...attrs,cx:ox+e.x,cy:-e.y,r:e.r});
+  else if(['arc','path','fill'].includes(e.type))node=el('path',{...attrs,d:C.shapePath(C.moved(e,ox,0)),fill:e.type==='fill'?color:'none','fill-rule':'evenodd','stroke-width':e.type==='fill'?0:attrs['stroke-width']});
+   else node=el('text',{transform:`translate(${ox+e.x} ${-e.y}) rotate(${-C.finite(e.angle,0)}) scale(${C.finite(e.widthFactor,1)} 1)`,x:0,y:C.textYOffset(e),'text-anchor':e.halign===1?'middle':e.halign===2?'end':'start','font-size':e.h*C.TEXT_EM,'font-family':'Arial, sans-serif',fill:color,'pointer-events':'none'},settings.resolved===undefined?e.text:settings.resolved);
+  node.dataset.entityId=e.id;parent.appendChild(node);
+  if(settings.selected) {
+   const b=entityBounds(e),pad=pixelSize()*3;
+   parent.appendChild(el('rect',{x:ox+b.x-pad,y:-b.y-b.h-pad,width:b.w+2*pad,height:b.h+2*pad,stroke:'#3282d5','stroke-width':pixelSize(),fill:'none','stroke-dasharray':`${pixelSize()*3} ${pixelSize()*3}`,'pointer-events':'none'}));
+  }
+ }
+ function draftEntity(p) {
+  let end={...p.end};const start=p.start;
+  if(p.shift&&p.type==='line'){
+   if(Math.abs(end.x-start.x)>Math.abs(end.y-start.y))end.y=start.y;else end.x=start.x;
+  }
+  if(p.shift&&p.type==='rect') {
+   const size=Math.min(Math.max(Math.abs(end.x-start.x),Math.abs(end.y-start.y)),
+    end.x>=start.x?p.target.width-start.x:start.x,end.y>=start.y?p.target.height-start.y:start.y);
+   end.x=start.x+(end.x>=start.x?size:-size);end.y=start.y+(end.y>=start.y?size:-size);
+  }
+  if(p.type==='circle')return {id:'preview',type:'circle',x:start.x,y:start.y,r:C.num(Math.hypot(end.x-start.x,end.y-start.y))};
+  return {id:'preview',type:p.type,x1:start.x,y1:start.y,x2:C.num(end.x),y2:C.num(end.y)};
+ }
+ function renderCanvas() {
+  canvas.setAttribute('viewBox',`${camera.x} ${camera.y} ${camera.w} ${camera.h}`);
+  canvas.dataset.tool=tool;canvas.dataset.panning=String(!!(pointer&&pointer.type==='pan'));
+  canvas.replaceChildren();
+  const defs=el('defs'),scene=el('g',{id:'drawing-scene'}),overlay=el('g',{id:'drawing-overlay'});
+  canvas.append(defs,scene,overlay);
+  function drawGrid(x,w,h,id){
+   if(!grid)return;
+   let pitch=step;while(pitch/pixelSize()<10)pitch*=5;
+   const pattern=el('pattern',{id,x,y:0,width:pitch,height:pitch,patternUnits:'userSpaceOnUse'});
+   pattern.appendChild(el('circle',{cx:0,cy:0,r:pixelSize()*.65,fill:'#d1dae5'}));defs.appendChild(pattern);
+   scene.appendChild(el('rect',{x,y:-h,width:w,height:h,fill:`url(#${id})`,'pointer-events':'none'}));
+  }
+  function showEditable(entities,target,ox) {
+   entities.forEach(e=>{
+    const selected=selection&&selection.scope===target.scope&&selection.id===target.id&&selection.entityId===e.id;
+    const displayed=selected&&moving?C.moved(e,moving.dx,moving.dy):e;
+    const resolved=e.type==='text'?(e.literal?e.text:C.vars(e.text,target.scope==='title'?page():project.pages.find(p=>p.id===target.id),target.scope==='title'?pageIndex():project.pages.findIndex(p=>p.id===target.id),project.pages.length)):undefined;
+    renderEntity(scene,displayed,ox,{selected,resolved});
+   });
+  }
+  if(mode==='title') {
+   const tb=project.titleBlock;
+   scene.appendChild(el('rect',{x:0,y:-tb.height,width:tb.width,height:tb.height,fill:'#fff',stroke:'#93a5ba','stroke-width':pixelSize()}));
+   drawGrid(0,tb.width,tb.height,'template-grid');showEditable(tb.entities,{scope:'title',id:null},0);
+   scene.appendChild(el('text',{x:0,y:-tb.height-pixelSize()*9,'font-size':pixelSize()*12,fill:'#566a80'},'Shared title block template - lower-left origin; variables preview the selected page'));
+  } else {
+   const pages=mode==='sheet'?[page()]:project.pages;
+   pages.forEach(p=>{
+    const i=project.pages.indexOf(p),x=mode==='model'?C.origin(project,i).x:0,W=project.paper.width,H=project.paper.height,m=project.margin;
+    scene.appendChild(el('rect',{x:x+pixelSize()*3,y:-H+pixelSize()*3,width:W,height:H,fill:'#283c5215'}));
+    scene.appendChild(el('rect',{x,y:-H,width:W,height:H,fill:'#fff',stroke:p.id===selectedPageId?'#4682bd':'#92a3b6','stroke-width':pixelSize()*(p.id===selectedPageId?1.5:1)}));
+    drawGrid(x,W,H,'grid-'+i);
+    if(p.frame!==false)renderEntity(scene,{id:'border-'+i,type:'rect',x1:m,y1:m,x2:W-m,y2:H-m},x,{color:'#526173'});
+    showEditable(p.entities,{scope:'page',id:p.id},x);
+    if(project.titleBlock.enabled){
+     const bx=x+W-m-project.titleBlock.width;
+     project.titleBlock.entities.forEach(e=>renderEntity(scene,C.moved(e,0,m),bx,{resolved:e.type==='text'?C.vars(e.text,p,i,project.pages.length):undefined}));
+    }
+    scene.appendChild(el('text',{x,y:-H-pixelSize()*8,'font-size':pixelSize()*12,fill:'#435c75'},`Page ${i+1} - ${p.title || 'UNTITLED'}`));
+   });
+  }
+  if(pending) {
+   const e=draftEntity(pending);renderEntity(overlay,e,pending.target.ox,{preview:true});
+   overlay.appendChild(el('circle',{cx:pending.target.ox+pending.start.x,cy:-pending.start.y,r:pixelSize()*3,fill:'#1463bc'}));
+  }
+ }
+ function inspector() {
+  const e=selectedEntity();$('inspector').hidden=!e;if(!e)return;
+  $('selectionName').textContent='Selected '+(e.type==='rect'?'rectangle':e.type);
+  // Do not replace an active coordinate input while the user is typing.
+  if(!$('geometryFields').contains(document.activeElement)) {
+   const fields=$('geometryFields');fields.replaceChildren();
+   const keys=e.type==='line'||e.type==='rect'?['x1','y1','x2','y2']:e.type==='circle'?['x','y','r']:e.type==='arc'?['x','y','r','start','end']:e.type==='path'||e.type==='fill'?[]:['x','y','h','angle','widthFactor'];
+   if(!keys.length){const note=document.createElement('p');note.className='hint';note.textContent='Imported '+e.type+'. Drag to move; Duplicate and Delete are available. Individual vertices are not edited in this version.';fields.appendChild(note);}
+   keys.forEach(key=>{
+    const label=document.createElement('label');label.textContent=({r:'Radius',h:'Text height'}[key]||key.toUpperCase())+(['angle','start','end'].includes(key)?' (degrees)':key==='widthFactor'?'':' (mm)');
+    const input=document.createElement('input');input.type='number';input.step='0.1';input.value=C.num(e[key]===undefined?(key==='widthFactor'?1:0):e[key]);input.dataset.coordinate=key;
+    input.onchange=()=>{
+     const n=Number(input.value);
+     if(!Number.isFinite(n)||(key==='h'||key==='r'||key==='widthFactor')&&n<=0){toast('Enter a valid '+key+' value.',true);input.value=e[key];return;}
+     change(()=>{const s=selectedEntity();if(s)s[key]=n;});
+    };
+    label.appendChild(input);fields.appendChild(label);
+   });
+  }
+  $('selectedTextLabel').hidden=e.type!=='text';if(e.type==='text')setInput('selectedText',e.text);
+ }
+ function renderUI() {
+  if(!pending)$('coordinates').textContent=$('coordinates').textContent.replace(' - click to finish','');
+  $('pageCount').textContent=project.pages.length;
+  const host=$('pageList'),scroll=host.scrollTop;host.replaceChildren();
+  project.pages.forEach((p,i)=>{
+   const row=document.createElement('button');row.className='page-row'+(p.id===selectedPageId?' active':'');row.dataset.pageId=p.id;
+   const n=document.createElement('span');n.className='page-number';n.textContent=i+1;
+   const title=document.createElement('span');title.className='page-name';title.textContent=p.title||'UNTITLED';
+   const x=document.createElement('small');x.textContent=C.origin(project,i).x+' mm';row.append(n,title,x);
+   row.onclick=()=>{selectedPageId=p.id;selection=null;pending=null;if(mode==='sheet')fit(false);render();};host.appendChild(row);
+  });host.scrollTop=scroll;
+  setInput('pageTitle',page().title);setInput('drawingNumber',page().number);setInput('revision',page().revision);
+  setInput('orientation',project.paper.orientation);setInput('width',project.paper.width);setInput('height',project.paper.height);setInput('gap',project.gap);setInput('margin',project.margin);
+  document.querySelectorAll('input[name=paper]').forEach(r=>r.checked=r.value===project.paper.preset);
+  setInput('tbWidth',project.titleBlock.width);setInput('tbHeight',project.titleBlock.height);$('tbEnabled').checked=project.titleBlock.enabled;
+  const i=pageIndex();$('pageLeftBtn').disabled=i===0;$('pageRightBtn').disabled=i===project.pages.length-1;$('deletePageBtn').disabled=project.pages.length===1;
+  $('undoBtn').disabled=!undo.length;$('redoBtn').disabled=!redo.length;
+  document.querySelectorAll('[data-tool]').forEach(b=>{if(b.tagName==='BUTTON')b.classList.toggle('active',b.dataset.tool===tool);});
+  document.querySelectorAll('[data-mode]').forEach(b=>b.classList.toggle('active',b.dataset.mode===mode));
+  $('textOptions').hidden=tool!=='text';
+  const instructions={select:'Click an object to select it. Drag to move it. Delete removes it. Edit coordinates in the left panel.',
+   line:'Line: click a start point, then an end point. Drag works too. Hold Shift for horizontal / vertical. Esc cancels.',
+   rect:'Rectangle: click two opposite corners, or drag. Hold Shift for a square. Esc cancels.',
+   circle:'Circle: click the centre, then a point on the circle, or drag. Esc cancels.',
+   text:'Text: enter the text above, then click where its lower-left baseline should go. Variables are allowed.',
+   pan:'Drag to move the view. Mouse wheel zooms. Middle-button drag or Space + drag also pans.'};
+  $('toolHint').textContent=instructions[tool];
+  const count=mode==='title'?project.titleBlock.entities.length:page().entities.length;
+  $('entityCount').textContent=count+(mode==='title'?' template objects':' drawing objects on page '+(pageIndex()+1));
+  inspector();
+  if($('importReportBtn'))$('importReportBtn').hidden=!project.importInfo;
+ }
+ function render(){renderUI();renderCanvas();}
+ function cancel(){pending=null;moving=null;pointer=null;tool='select';render();}
+ function setTool(name){pending=null;moving=null;pointer=null;tool=name;render();}
+ function finishShape(){
+  if(!pending)return;const p=pending,e=draftEntity(p);
+  if(e.type==='circle'&&e.r<1e-6||e.type==='line'&&Math.hypot(e.x2-e.x1,e.y2-e.y1)<1e-6||e.type==='rect'&&(Math.abs(e.x2-e.x1)<1e-6||Math.abs(e.y2-e.y1)<1e-6)){
+   toast('Choose a different end point.');return;
+  }
+  e.id=C.uid();pending=null;change(()=>{listFor(p.target).push(e);selection=null;});
+ }
+ function release(evt){try{if(canvas.hasPointerCapture(evt.pointerId))canvas.releasePointerCapture(evt.pointerId);}catch(_){}}
+ canvas.addEventListener('pointerdown',evt=>{
+  if(evt.button!==0&&evt.button!==1)return;
+  evt.preventDefault();canvas.focus({preventScroll:true});
+  try{canvas.setPointerCapture(evt.pointerId);}catch(_){}
+  const world=toWorld(evt);
+  if(evt.button===1||tool==='pan'||spaceDown){pointer={type:'pan',x:evt.clientX,y:evt.clientY,camera:{...camera}};renderCanvas();return;}
+  if(pending) {
+   pending.end=localPoint(pending.target,world);pending.shift=evt.shiftKey;
+   pointer={type:'draw',second:true,x:evt.clientX,y:evt.clientY};renderCanvas();return;
+  }
+  const target=targetAt(world);
+  if(!target){selection=null;render();release(evt);return;}
+  if(target.scope==='page')selectedPageId=target.id;
+  const point=localPoint(target,world);
+  if(tool==='select') {
+   const found=hit(target,{x:world.x-target.ox,y:world.y});
+   selection=found?{scope:target.scope,id:target.id,entityId:found.id}:null;
+   if(found){moving={target,entityId:found.id,original:C.clone(found),start:world,dx:0,dy:0};pointer={type:'move',x:evt.clientX,y:evt.clientY};}
+   render();return;
+  }
+  if(tool==='text') {
+   const value=C.text($('newText').value),h=Number($('newTextHeight').value);
+   if(!value.trim()||!Number.isFinite(h)||h<=0){toast('Enter text and a positive text height first.',true);release(evt);return;}
+   const e=C.entity('text',{x:point.x,y:point.y,h,text:value});
+   change(()=>{listFor(target).push(e);selection={scope:target.scope,id:target.id,entityId:e.id};tool='select';});
+   release(evt);return;
+  }
+  pending={type:tool,start:point,end:point,target,shift:evt.shiftKey};pointer={type:'draw',second:false,x:evt.clientX,y:evt.clientY};render();
+ });
+ canvas.addEventListener('pointermove',evt=>{
+  const world=toWorld(evt);
+  if(pointer&&pointer.type==='pan'){
+   const r=canvas.getBoundingClientRect();camera={...pointer.camera,x:pointer.camera.x-(evt.clientX-pointer.x)*pointer.camera.w/r.width,y:pointer.camera.y-(evt.clientY-pointer.y)*pointer.camera.h/r.height};renderCanvas();return;
+  }
+  if(moving&&pointer&&pointer.type==='move'){
+   moving.dx=snapValue(world.x-moving.start.x);moving.dy=snapValue(world.y-moving.start.y);renderCanvas();
+  }
+  if(pending){pending.end=localPoint(pending.target,world);pending.shift=evt.shiftKey;renderCanvas();}
+  const t=pending?pending.target:targetAt(world);
+  if(t){const q=localPoint(t,world,false);$('coordinates').textContent=(t.scope==='title'?'Template':('Page '+(project.pages.findIndex(p=>p.id===t.id)+1)))+`: X ${q.x.toFixed(2)}   Y ${q.y.toFixed(2)} mm`+(pending?' - click to finish':'');}
+ });
+ canvas.addEventListener('pointerup',evt=>{
+  if(!pointer){release(evt);return;}
+  const p=pointer;pointer=null;
+  if(p.type==='move'&&moving){
+   const m=moving;moving=null;
+   if(m.dx||m.dy)change(()=>{const arr=listFor(m.target),index=arr.findIndex(e=>e.id===m.entityId);if(index>=0)arr[index]=C.moved(m.original,m.dx,m.dy);});
+   else render();
+  } else if(p.type==='draw'&&pending){
+   pending.end=localPoint(pending.target,toWorld(evt));pending.shift=evt.shiftKey;
+   if(p.second||Math.hypot(evt.clientX-p.x,evt.clientY-p.y)>4)finishShape();else renderCanvas();
+  }else renderCanvas();
+  release(evt);
+ });
+ canvas.addEventListener('pointercancel',evt=>{pointer=null;pending=null;moving=null;release(evt);renderCanvas();});
+ canvas.addEventListener('contextmenu',evt=>{evt.preventDefault();cancel();});
+ canvas.addEventListener('wheel',evt=>{evt.preventDefault();const p=toWorld(evt);zoom(Math.exp(Math.max(-300,Math.min(300,evt.deltaY))*.0015),{x:p.x,y:-p.y});},{passive:false});
+ document.querySelectorAll('button[data-tool]').forEach(b=>b.onclick=()=>setTool(b.dataset.tool));
+ document.querySelectorAll('button[data-mode]').forEach(b=>b.onclick=()=>{mode=b.dataset.mode;selection=null;pending=null;moving=null;pointer=null;fit(false);render();});
+ $('fitBtn').onclick=()=>fit();$('zoomInBtn').onclick=()=>zoom(.8);$('zoomOutBtn').onclick=()=>zoom(1.25);
+ $('undoBtn').onclick=()=>history('undo');$('redoBtn').onclick=()=>history('redo');$('cancelBtn').onclick=cancel;
+ $('gridEnabled').onchange=()=>{grid=$('gridEnabled').checked;renderCanvas();};
+ $('snapEnabled').onchange=()=>{snap=$('snapEnabled').checked;};
+ $('snapStep').onchange=()=>{const n=Number($('snapStep').value);if(n>0&&n<=100)step=n;else $('snapStep').value=step;renderCanvas();};
+ $('variable').onchange=()=>{const v=$('variable').value;if(!v)return;const input=$('newText');input.value=input.value==='Note'?v:input.value+v;$('variable').value='';};
+ function deleteSelected(){if(!selectedEntity())return;change(()=>{const arr=listFor(selection),i=arr.findIndex(e=>e.id===selection.entityId);if(i>=0)arr.splice(i,1);selection=null;});}
+ function duplicateSelected(){const e=selectedEntity();if(!e)return;change(()=>{const copy=C.moved(e,2,2);copy.id=C.uid();listFor(selection).push(copy);selection.entityId=copy.id;});}
+ $('deleteEntityBtn').onclick=deleteSelected;$('duplicateEntityBtn').onclick=duplicateSelected;$('deselectBtn').onclick=()=>{selection=null;render();};
+ $('selectedText').oninput=()=>{const value=$('selectedText').value;change(()=>{const e=selectedEntity();if(e)e.text=C.text(value);});};
+ document.addEventListener('keydown',evt=>{
+  const tag=evt.target.tagName,typing=['INPUT','TEXTAREA','SELECT'].includes(tag)||evt.target.isContentEditable;
+  if(evt.key==='Escape'){evt.preventDefault();cancel();return;}
+  if(typing)return;
+  if((evt.ctrlKey||evt.metaKey)&&evt.key.toLowerCase()==='z'){evt.preventDefault();history(evt.shiftKey?'redo':'undo');return;}
+  if((evt.ctrlKey||evt.metaKey)&&evt.key.toLowerCase()==='y'){evt.preventDefault();history('redo');return;}
+  if((evt.ctrlKey||evt.metaKey)&&evt.key.toLowerCase()==='s'){evt.preventDefault();saveProject();return;}
+  if((evt.ctrlKey||evt.metaKey)&&evt.key.toLowerCase()==='d'){evt.preventDefault();duplicateSelected();return;}
+  if(evt.key==='Delete'||evt.key==='Backspace'){evt.preventDefault();deleteSelected();return;}
+  if(evt.code==='Space'){evt.preventDefault();spaceDown=true;return;}
+  if(!evt.ctrlKey&&!evt.metaKey&&!evt.altKey){const shortcuts={v:'select',l:'line',r:'rect',c:'circle',t:'text',h:'pan'};const name=shortcuts[evt.key.toLowerCase()];if(name){evt.preventDefault();setTool(name);}}
+ });
+ document.addEventListener('keyup',evt=>{if(evt.code==='Space')spaceDown=false;});
+ window.addEventListener('blur',()=>{spaceDown=false;pointer=null;moving=null;});
+ $('addPageBtn').onclick=()=>change(()=>{
+  if(project.pages.length>=200)throw Error('Maximum 200 pages.');
+  const p=C.newPage(project.pages.length+1);p.number=page().number;p.revision=page().revision;project.pages.push(p);selectedPageId=p.id;selection=null;pending=null;
+ },true);
+ $('deletePageBtn').onclick=()=>{
+  if(project.pages.length<=1)return;
+  if(!confirm('Delete this page and its drawing objects? Undo can restore it.'))return;
+  change(()=>{const i=pageIndex();project.pages.splice(i,1);selectedPageId=project.pages[Math.max(0,i-1)].id;selection=null;pending=null;},true);
+ };
+ $('duplicatePageBtn').onclick=()=>change(()=>{
+  if(project.pages.length>=200)throw Error('Maximum 200 pages.');
+  const p=C.clone(page());p.id=C.uid();p.title+=' (copy)';p.entities.forEach(e=>e.id=C.uid());project.pages.splice(pageIndex()+1,0,p);selectedPageId=p.id;selection=null;pending=null;
+ },true);
+ function reorder(delta){change(()=>{const i=pageIndex(),j=i+delta;if(j<0||j>=project.pages.length)return;[project.pages[i],project.pages[j]]=[project.pages[j],project.pages[i]];pending=null;},true);}
+ $('pageLeftBtn').onclick=()=>reorder(-1);$('pageRightBtn').onclick=()=>reorder(1);
+ [['pageTitle','title'],['drawingNumber','number'],['revision','revision']].forEach(([id,key])=>$(id).oninput=()=>{const val=$(id).value;change(()=>page()[key]=C.text(val));});
+ function preset(){const sides=C.presets[project.paper.preset];if(!sides)return;[project.paper.width,project.paper.height]=project.paper.orientation==='landscape'?[sides[1],sides[0]]:sides;}
+ function validNumber(id,min,max){const n=Number($(id).value);if(!Number.isFinite(n)||n<min||n>max)throw Error(id+' must be between '+min+' and '+C.num(max)+'.');return n;}
+ function pageSizeChanged(){
+  if(project.titleBlock.enabled&&(project.titleBlock.width>project.paper.width-2*project.margin||project.titleBlock.height>project.paper.height-2*project.margin))toast('The title block is larger than the page interior. Resize the template or switch it off.',true);
+ }
+ document.querySelectorAll('input[name=paper]').forEach(r=>r.onchange=()=>{change(()=>{project.paper.preset=r.value;preset();pending=null;},true);pageSizeChanged();});
+ $('orientation').onchange=()=>{change(()=>{
+  const previous=project.paper.orientation;project.paper.orientation=$('orientation').value;
+  if(project.paper.preset==='custom'&&previous!==project.paper.orientation)[project.paper.width,project.paper.height]=[project.paper.height,project.paper.width];else preset();pending=null;
+ },true);pageSizeChanged();};
+ ['width','height'].forEach(id=>$(id).onchange=()=>{
+  change(()=>{project.paper[id]=validNumber(id,50,1000000);project.paper.preset='custom';pending=null;},true);pageSizeChanged();
+ });
+ $('gap').onchange=()=>change(()=>{project.gap=validNumber('gap',0,5000);pending=null;},true);
+ $('margin').onchange=()=>{change(()=>{project.margin=validNumber('margin',0,Math.min(project.paper.width,project.paper.height)/2-.1);pending=null;});pageSizeChanged();};
+ $('tbEnabled').onchange=()=>change(()=>project.titleBlock.enabled=$('tbEnabled').checked);
+ $('editTbBtn').onclick=()=>{mode='title';pending=null;selection=null;fit(false);render();};
+ ['tbWidth','tbHeight'].forEach(id=>$(id).onchange=()=>{
+  change(()=>{
+   const tb=project.titleBlock,key=id==='tbWidth'?'width':'height',value=validNumber(id,1,5000),sx=key==='width'?value/tb.width:1,sy=key==='height'?value/tb.height:1;
+   tb.entities.forEach(e=>{if(e.type==='path'){e.points.forEach(p=>{p.x*=sx;p.y*=sy;});}else if(e.type==='fill'){e.loops.forEach(l=>l.forEach(p=>{p.x*=sx;p.y*=sy;}));}else if(e.type==='line'||e.type==='rect'){e.x1*=sx;e.x2*=sx;e.y1*=sy;e.y2*=sy;}else{e.x*=sx;e.y*=sy;if(e.type==='circle'||e.type==='arc')e.r*=Math.min(sx,sy);else e.h*=Math.min(sx,sy);}});
+   tb[key]=value;pending=null;
+  },true);pageSizeChanged();
+ });
+ $('resetTbBtn').onclick=()=>{if(!confirm('Replace the shared title block with the default template?'))return;change(()=>{project.titleBlock={enabled:true,width:145,height:40,entities:C.defaults()};selection=null;pending=null;},true);};
+ $('clearTbBtn').onclick=()=>{if(!confirm('Remove all objects from the shared title block? Undo can restore them.'))return;change(()=>{project.titleBlock.entities=[];selection=null;pending=null;});};
+ function download(filename,contents,type='text/plain') {
+  const url=URL.createObjectURL(new Blob([contents],{type})),a=document.createElement('a');a.href=url;a.download=filename;a.hidden=true;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);
+ }
+ function saveProject(){download('page-builder-project.json',JSON.stringify(project,null,2),'application/json');toast('Project JSON saved. Open it here to continue editing.');}
+ function exportFile(type) {
+  if(pending){toast('Finish or cancel the current shape before exporting.',true);return;}
+  try {
+   if(type==='dxf'){download('model-and-sheets.dxf',C.dxf(project),'application/dxf');toast('DXF exported: '+project.pages.length+' model pages with linked Sheet viewports.');}
+   else if(type==='svg'){download('model-pages.svg',C.svg(project),'image/svg+xml');toast('SVG exported with embedded drawing styles.');}
+   else {download('model-only-fallback.lsp',C.lisp(project));toast('Model-only LISP saved. Load it in an empty test drawing, then run BUILDWEBPAGES.');}
+  } catch(e){toast('Export failed: '+e.message,true);}
+ }
+ $('saveBtn').onclick=saveProject;$('dxfBtn').onclick=()=>exportFile('dxf');$('svgBtn').onclick=()=>exportFile('svg');$('lispBtn').onclick=()=>exportFile('lisp');
+ $('loadBtn').onclick=()=>$('loadInput').click();
+ function replaceProject(p){change(()=>{project=p;selectedPageId=p.pages[0].id;selection=null;pending=null;moving=null;pointer=null;mode='model';tool='select';},true);}
+ $('loadInput').onchange=async evt=>{
+  const f=evt.target.files[0];if(!f)return;
+  try {if(f.size>15*1024*1024)throw Error('Project exceeds 15 MB.');const p=C.validateProject(JSON.parse(await f.text()));replaceProject(p);toast('Project opened.');}
+  catch(e){toast('Could not open project: '+e.message,true);}evt.target.value='';
+ };
+ $('newBtn').onclick=()=>{if(confirm('Start a new project? Save project first to keep a file copy. Undo can restore this session.'))replaceProject(C.newProject());};
+ $('sampleBtn').onclick=()=>{
+  if(project.pages.some(p=>p.entities.length)&&!confirm('Replace this project with the sample? Save first to keep a file copy. Undo can restore it.'))return;
+  replaceProject(C.sampleProject());toast('Two sample pages loaded. The first contains an exactly 100 mm line.');
+ };
+ const observer=new ResizeObserver(()=>{
+  if(!viewInitialized)fit(false);
+  else {const r=canvas.getBoundingClientRect();const h=camera.w*Math.max(1,r.height)/Math.max(1,r.width);camera.y+=(camera.h-h)/2;camera.h=h;}
+  renderCanvas();
+ });observer.observe($('stage'));
+ window.addEventListener('error',evt=>{if(evt.message){$('bootError').hidden=false;$('bootError').textContent='Drawing engine error: '+evt.message;}});
+ window.PageBuilder=Object.freeze({loadImported:p=>replaceProject(C.validateProject(p)),getProject:()=>C.clone(project),getView:()=>({mode,tool,camera:{...camera},pending:!!pending,selectedPageId}),exportDXF:()=>C.dxf(project)});
+ fit(false);render();$('bootError').hidden=true;
+ if(restored)toast('Restored the last browser backup. Save project for a portable JSON copy.');
+})();
+
+
+</script>
+<script>
+/* Import UI. The editor and JSON/DXF import work offline.
+ * DWG decoding fetches the pinned LibreDWG-Web module and WASM from jsDelivr.
+ * Only decoder code is downloaded. The drawing ArrayBuffer stays in a local Worker.
+ */
+(function(){
+'use strict';
+const $=id=>document.getElementById(id),C=window.PageBuilderCore,I=window.CadImport;
+const modal=$('cadImportDialog');
+let worker=null,workerUrl=null,decoded=null,rawDatabase=null,readyProject=null,timer=null,reading=false;
+const version='0.7.17',base='https://cdn.jsdelivr.net/npm/@mlightcad/libredwg-web@'+version;
+function download(name,value){const s=typeof value==='string'?value:JSON.stringify(value,(_,v)=>typeof v==='bigint'?v.toString():v,2);const url=URL.createObjectURL(new Blob([s],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),60000);}
+function stop(){clearTimeout(timer);if(worker)worker.terminate();if(workerUrl)URL.revokeObjectURL(workerUrl);worker=null;workerUrl=null;reading=false;$('cadReadBtn').disabled=false;}
+function status(message,error=false){$('cadStatus').textContent=message;$('cadStatus').classList.toggle('error',error);}
+function open(){decoded=null;rawDatabase=null;readyProject=null;$('cadPreview').replaceChildren();$('cadDetails').textContent='';$('cadAcceptBtn').disabled=true;$('cadSaveJsonBtn').disabled=true;$('cadDiagnosticBtn').disabled=true;$('cadConfirmed').checked=false;$('cadUnitBox').hidden=true;status('Choose a file, then click Read drawing. Your current project stays open until you accept the preview.');modal.showModal();}
+function workerMain(){
+ const safe=v=>{try{return typeof v==='string'?v:JSON.stringify(v);}catch(_){return String(v);}};
+ self.onmessage=async evt=>{
+  let db=null,lib=null,ptr=null;const warnings=[];
+  const oldWarn=console.warn;console.warn=(...a)=>{warnings.push(a.map(safe).join(' '));oldWarn(...a);};
+  const send=(type,data)=>self.postMessage({type,...data});
+  try{
+   const {kind,buffer,name,includeHidden,decoderBase}=evt.data;
+   if(kind==='dwg'){
+    send('progress',{message:'Downloading the DWG decoder. Your drawing is not uploaded.'});
+    const module=await import(decoderBase+'/dist/libredwg-web.js');
+    if(!module.LibreDwg)throw Error('The downloaded decoder does not expose LibreDwg.');
+    lib=await module.LibreDwg.create(decoderBase+'/wasm');
+    send('progress',{message:'Decoding DWG locally in this browser...'});
+    ptr=lib.dwg_read_data(buffer,module.Dwg_File_Type?module.Dwg_File_Type.DWG:0);
+    if(!ptr)throw Error('The DWG decoder did not return a drawing.');
+    const result=typeof lib.convertEx==='function'?lib.convertEx(ptr):{database:lib.convert(ptr),stats:{}};
+    db=result.database;send('progress',{message:'Translating drawing geometry...'});
+    const data=self.CadImport.decodeDatabase(db,{name,includeHidden,stats:result.stats});
+    data.report.decoder='LibreDWG-Web '+evt.data.decoderVersion;
+    data.report.decoderWarnings=warnings;
+    send('complete',{data,database:db});
+   }else{
+    const s=new TextDecoder().decode(buffer);
+    if(kind==='dxf')db=self.CadImport.parseDXF(s);
+    else {const j=JSON.parse(s);db=j.database||j;}
+    const data=self.CadImport.decodeDatabase(db,{name,includeHidden});
+    data.report.decoder=kind==='dxf'?'Built-in ASCII DXF reader':'Previously decoded DWG database';
+    send('complete',{data,database:db});
+   }
+  }catch(err){send('failed',{message:err.message||String(err),database:db,warnings});}
+  finally {if(lib&&ptr)try{lib.dwg_free(ptr);}catch(_){} }
+ };
+}
+async function read(){
+ const f=$('cadFile').files[0];if(!f){status('Choose a DWG or ASCII DXF file first.',true);return;}
+ if(f.size>40*1024*1024){status('This beta limits imports to 40 MB. Your current project has not changed.',true);return;}
+ stop();decoded=null;rawDatabase=null;readyProject=null;reading=true;$('cadReadBtn').disabled=true;$('cadAcceptBtn').disabled=true;$('cadSaveJsonBtn').disabled=true;$('cadConfirmed').checked=false;$('cadDiagnosticBtn').disabled=true;$('cadPreview').replaceChildren();$('cadDetails').textContent='';$('cadUnitBox').hidden=true;
+ const kind=/\.dwg$/i.test(f.name)?'dwg':/\.dxf$/i.test(f.name)?'dxf':/\.json$/i.test(f.name)?'json':null;
+ if(!kind){stop();status('Choose .dwg, .dxf, or a decoded database .json.',true);return;}
+ try{
+  const buffer=await f.arrayBuffer();
+  if(kind==='dwg'&&!/^AC10\d\d/.test(new TextDecoder().decode(buffer.slice(0,6))))throw Error('This file does not have a supported DWG header.');
+  const adapter=$('cad-import-adapter').textContent;
+  workerUrl=URL.createObjectURL(new Blob([adapter,'\n('+workerMain.toString()+')();'],{type:'text/javascript'}));
+  worker=new Worker(workerUrl);
+  worker.onmessage=evt=>{
+   const msg=evt.data;
+   if(msg.type==='progress'){status(msg.message);return;}
+   if(msg.type==='failed'){
+    rawDatabase=msg.database||null;$('cadDiagnosticBtn').disabled=!rawDatabase;stop();
+    status('Import stopped: '+msg.message+' Your current project was not changed.',true);
+    $('cadDetails').textContent='For DWG, the decoder requires Internet access to cdn.jsdelivr.net. A company filter can block it. The normal editor still works without it. This beta has not been end-to-end tested with the supplied E180 DWG.';
+    return;
+   }
+   if(msg.type==='complete'){
+    decoded=msg.data;rawDatabase=msg.database;$('cadDiagnosticBtn').disabled=false;stop();
+    const scale=decoded.report.suggestedScale;$('cadUnitBox').hidden=false;$('cadUnits').value=scale===null?'':String(scale);
+    if(!$('cadUnits').value&&scale!==null){$('cadUnits').value='custom';$('cadCustomScale').value=scale;}
+    $('cadCustomScaleBox').hidden=$('cadUnits').value!=='custom';
+    $('cadUnitNote').textContent='Drawing units reported by the file: '+decoded.report.unitName+'. Unknown units must be chosen explicitly.';
+    preview();
+   }
+  };
+  worker.onerror=evt=>{stop();status('Import worker failed: '+(evt.message||'browser could not start the decoder')+'. Your project is unchanged.',true);};
+  timer=setTimeout(()=>{stop();status('Import timed out after 90 seconds. Check Internet access for the DWG decoder. Your project is unchanged.',true);},90000);
+  worker.postMessage({kind,buffer,name:f.name,includeHidden:$('cadHidden').checked,decoderBase:base,decoderVersion:version},[buffer]);
+  status(kind==='dwg'?'Starting DWG reader...':'Reading drawing locally...');
+ }catch(err){stop();status(err.message,true);}
+}
+function reportText(r){
+ const section=(label,obj)=>Object.keys(obj||{}).length?'\n'+label+'\n'+Object.entries(obj).map(([k,v])=>'  '+v+' - '+k).join('\n'):'\n'+label+'\n  None reported';
+ return 'Source: '+r.sourceName+'\nDecoder: '+r.decoder+'\nTop-level Model objects: '+r.decodedModelEntities+'\nEditable objects after expansion: '+r.importedObjects+
+ '\nDetected layout names: '+((r.layoutNames||[]).join(', ')||'(none)')+section('Source entity types',r.sourceEntityTypes)+section('Skipped / excluded',r.skipped)+section('Simplified / expanded',r.approximated)+
+ '\n\nDecoder statistics\n'+JSON.stringify(r.decoderStats||{},null,2)+((r.decoderWarnings||[]).length?'\nDecoder warnings\n'+r.decoderWarnings.join('\n'):'')+
+ '\n\nImport scope\n'+(r.notes||[]).map(s=>'  '+s).join('\n');
+}
+function preview(){
+ if(!decoded)return;
+ $('cadDetails').textContent=reportText(decoded.report);
+ const value=$('cadUnits').value,scale=value==='custom'?Number($('cadCustomScale').value):Number(value);
+ if(!value||!(scale>0)){readyProject=null;$('cadAcceptBtn').disabled=true;$('cadSaveJsonBtn').disabled=true;status('The file does not specify usable units. Select the drawing units to generate the preview.',true);return;}
+ try{
+  readyProject=I.makeProject(decoded,window.PageBuilder.getProject(),scale);
+  readyProject=C.validateProject(readyProject);
+  const svg=C.svg(readyProject);$('cadPreview').innerHTML=svg;
+  const s=$('cadPreview').querySelector('svg');s.setAttribute('width','100%');s.setAttribute('height','340');
+  $('cadSize').textContent='Imported drawing: '+readyProject.paper.width.toFixed(2)+' x '+readyProject.paper.height.toFixed(2)+' mm, including a 10 mm blank margin. No fit-to-page rescaling.';
+  $('cadSaveJsonBtn').disabled=false;$('cadAcceptBtn').disabled=!$('cadConfirmed').checked;
+  status('Preview ready. Review the drawing and import report before accepting.');
+ }catch(err){readyProject=null;$('cadAcceptBtn').disabled=true;$('cadSaveJsonBtn').disabled=true;status('Cannot prepare the drawing: '+err.message,true);}
+}
+$('importCadBtn').onclick=open;
+$('cadReadBtn').onclick=read;
+$('cadCloseBtn').onclick=()=>{stop();modal.close();};
+modal.addEventListener('cancel',()=>stop());
+$('cadUnits').onchange=()=>{$('cadCustomScaleBox').hidden=$('cadUnits').value!=='custom';preview();};$('cadCustomScale').onchange=preview;
+$('cadConfirmed').onchange=()=>{$('cadAcceptBtn').disabled=!readyProject||!$('cadConfirmed').checked;};
+$('cadAcceptBtn').onclick=()=>{
+ if(!readyProject||!$('cadConfirmed').checked)return;
+ try{window.PageBuilder.loadImported(readyProject);modal.close();}catch(e){status('The drawing was not loaded: '+e.message,true);}
+};
+$('cadSaveJsonBtn').onclick=()=>{if(readyProject)download('imported-drawing.page-builder.json',readyProject);};
+$('cadDiagnosticBtn').onclick=()=>{if(rawDatabase)download('decoded-drawing.database.json',{database:rawDatabase,report:decoded&&decoded.report});};
+$('importReportBtn').onclick=()=>{const info=window.PageBuilder.getProject().importInfo;if(info)download('drawing-import-report.json',info);};
+})();
+
+</script>
+</body>
+</html>

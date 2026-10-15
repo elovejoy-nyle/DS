@@ -1,0 +1,13 @@
+<dialog id="cadImportDialog" aria-labelledby="cadImportHeading">
+ <div class="cad-dialog-head"><h2 id="cadImportHeading">Import DWG / DXF <span class="pill">experimental</span></h2><button id="cadCloseBtn">Cancel / close</button></div>
+ <p class="cad-notice"><strong>Model import, not a lossless CAD conversion.</strong> This version places all Model geometry on one editing canvas, retaining its relative positions. It does not rebuild the original Sheet tabs. Your current project changes only when you accept the preview.</p>
+ <p class="hint">DWG decoding downloads LibreDWG-Web 0.7.17 from jsDelivr when you click Read drawing. Your drawing stays in a local browser worker; it is not sent to a conversion server. ASCII DXF import needs no network. The supplied E180 DWG has not been decoded in the development environment.</p>
+ <div class="two"><label>Drawing file<input id="cadFile" type="file" accept=".dwg,.dxf,.json"></label><div><label class="check"><input id="cadHidden" type="checkbox">Include off / frozen layers</label><button id="cadReadBtn" class="primary wide">Read drawing</button></div></div>
+ <p id="cadStatus" role="status"></p>
+ <div id="cadUnitBox" hidden><div class="two"><label>Source drawing units<select id="cadUnits"><option value="">Choose units...</option><option value="1">Millimetres</option><option value="25.4">Inches</option><option value="304.8">Feet</option><option value="10">Centimetres</option><option value="1000">Metres</option><option value="custom">Custom multiplier</option></select></label><label id="cadCustomScaleBox" hidden>Millimetres per source unit<input id="cadCustomScale" type="number" min="0.000001" step="any" value="1"></label></div><p class="hint" id="cadUnitNote"></p></div>
+ <p class="hint" id="cadSize"></p>
+ <div id="cadPreview" aria-label="Imported drawing preview"></div>
+ <details open><summary>Import report - skipped objects and simplifications</summary><pre id="cadDetails"></pre></details>
+ <label class="check cad-confirm"><input id="cadConfirmed" type="checkbox">I reviewed the preview and report. Load this simplified Model copy.</label>
+ <div class="cad-dialog-actions"><button id="cadDiagnosticBtn" disabled>Save decoder diagnostic JSON</button><button id="cadSaveJsonBtn" disabled>Save as project JSON</button><button id="cadAcceptBtn" class="primary" disabled>Load into editor</button></div>
+</dialog>

@@ -1,0 +1,21 @@
+PASS portrait and customized default retained
+PASS DWG database adapter expands nested blocks with base points, rotation and scaling
+PASS instance attributes are not transformed twice
+PASS arc and bulge directions retained
+PASS unknown and hidden objects reported
+PASS hidden-layer option includes hidden geometry
+PASS units required when unspecified
+PASS Model block ownership excludes paper-space text even without paper flags
+PASS Repeated nested block attributes remain present in every instance
+PASS Upstream POLYLINE2D naming is supported
+PASS MTEXT direction vector controls rotation
+PASS import keeps old template but does not overlay it
+PASS unit conversion preserves line length
+PASS JSON validation preserves rotation, source metadata and literal text
+PASS full title-block data fields survive save/load
+PASS DXF has native arcs, polylines, fills and rotated text
+PASS SVG and extended entity translations work
+PASS LISP refuses unsupported shapes instead of silently dropping them
+PASS ASCII DXF real-file import passes
+PASS ASCII DXF roundtrip preserves supported primitive counts
+TOTAL 20 passed. Actual DWG binary decoding NOT executed.

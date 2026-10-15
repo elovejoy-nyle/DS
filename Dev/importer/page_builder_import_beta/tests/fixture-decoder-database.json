@@ -1,0 +1,311 @@
+{
+  "database": {
+    "header": {
+      "INSUNITS": 4
+    },
+    "tables": {
+      "LAYER": {
+        "entries": [
+          {
+            "name": "0",
+            "colorIndex": 7
+          },
+          {
+            "name": "WIRE",
+            "colorIndex": 1
+          },
+          {
+            "name": "HIDDEN",
+            "off": true
+          }
+        ]
+      },
+      "BLOCK_RECORD": {
+        "entries": [
+          {
+            "name": "CONTACT",
+            "basePoint": {
+              "x": 5,
+              "y": 5
+            },
+            "entities": [
+              {
+                "type": "LINE",
+                "startPoint": {
+                  "x": 5,
+                  "y": 5
+                },
+                "endPoint": {
+                  "x": 15,
+                  "y": 5
+                },
+                "layer": "0"
+              },
+              {
+                "type": "CIRCLE",
+                "center": {
+                  "x": 10,
+                  "y": 10
+                },
+                "radius": 2
+              }
+            ]
+          },
+          {
+            "name": "NESTED",
+            "basePoint": {
+              "x": 0,
+              "y": 0
+            },
+            "entities": [
+              {
+                "type": "INSERT",
+                "name": "CONTACT",
+                "insertionPoint": {
+                  "x": 10,
+                  "y": 0
+                },
+                "rotation": 0,
+                "xScale": 1,
+                "yScale": 1
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "objects": {
+      "LAYOUT": [
+        {
+          "layoutName": "Model"
+        },
+        {
+          "layoutName": "CONTROL POWER"
+        },
+        {
+          "layoutName": "ANALOG + COMS"
+        }
+      ]
+    },
+    "entities": [
+      {
+        "type": "LINE",
+        "handle": "10",
+        "layer": "WIRE",
+        "startPoint": {
+          "x": 0,
+          "y": 0
+        },
+        "endPoint": {
+          "x": 100,
+          "y": 0
+        }
+      },
+      {
+        "type": "INSERT",
+        "name": "CONTACT",
+        "handle": "11",
+        "layer": "WIRE",
+        "insertionPoint": {
+          "x": 40,
+          "y": 40
+        },
+        "rotation": 1.5707963267948966,
+        "xScale": 2,
+        "yScale": 2,
+        "attribs": [
+          {
+            "type": "ATTRIB",
+            "handle": "12",
+            "tag": "NAME",
+            "text": {
+              "text": "K1",
+              "startPoint": {
+                "x": 50,
+                "y": 60
+              },
+              "textHeight": 2.5,
+              "rotation": 0,
+              "halign": 0,
+              "valign": 0
+            }
+          }
+        ]
+      },
+      {
+        "type": "INSERT",
+        "name": "NESTED",
+        "handle": "13",
+        "layer": "WIRE",
+        "insertionPoint": {
+          "x": 60,
+          "y": 10
+        },
+        "rotation": 0,
+        "xScale": 1,
+        "yScale": 1
+      },
+      {
+        "type": "ARC",
+        "center": {
+          "x": 100,
+          "y": 50
+        },
+        "radius": 10,
+        "startAngle": 0,
+        "endAngle": 3.141592653589793
+      },
+      {
+        "type": "LWPOLYLINE",
+        "flag": 512,
+        "vertices": [
+          {
+            "x": 10,
+            "y": 10,
+            "bulge": 0
+          },
+          {
+            "x": 20,
+            "y": 10,
+            "bulge": 0
+          },
+          {
+            "x": 20,
+            "y": 20,
+            "bulge": 0
+          },
+          {
+            "x": 10,
+            "y": 20,
+            "bulge": 0
+          }
+        ]
+      },
+      {
+        "type": "LWPOLYLINE",
+        "flag": 0,
+        "vertices": [
+          {
+            "x": 20,
+            "y": 70,
+            "bulge": 1
+          },
+          {
+            "x": 40,
+            "y": 70,
+            "bulge": 0
+          }
+        ]
+      },
+      {
+        "type": "TEXT",
+        "text": "ROTATED",
+        "startPoint": {
+          "x": 140,
+          "y": 30
+        },
+        "endPoint": {
+          "x": 140,
+          "y": 30
+        },
+        "textHeight": 3,
+        "rotation": 1.5707963267948966,
+        "xScale": 0.8,
+        "halign": 1,
+        "valign": 2
+      },
+      {
+        "type": "TEXT",
+        "text": "Literal {PAGE}",
+        "startPoint": {
+          "x": 10,
+          "y": 90
+        },
+        "textHeight": 3
+      },
+      {
+        "type": "MTEXT",
+        "text": "first\\Psecond",
+        "insertionPoint": {
+          "x": 80,
+          "y": 85
+        },
+        "textHeight": 3,
+        "rotation": 0,
+        "attachmentPoint": 1,
+        "lineSpacing": 1
+      },
+      {
+        "type": "SOLID",
+        "corner1": {
+          "x": 5,
+          "y": 40
+        },
+        "corner2": {
+          "x": 15,
+          "y": 40
+        },
+        "corner3": {
+          "x": 5,
+          "y": 50
+        },
+        "corner4": {
+          "x": 15,
+          "y": 50
+        }
+      },
+      {
+        "type": "HATCH",
+        "solidFill": 1,
+        "boundaryPaths": [
+          {
+            "vertices": [
+              {
+                "x": 20,
+                "y": 40
+              },
+              {
+                "x": 30,
+                "y": 40
+              },
+              {
+                "x": 30,
+                "y": 50
+              },
+              {
+                "x": 20,
+                "y": 50
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "TEXT",
+        "layer": "HIDDEN",
+        "text": "hidden",
+        "startPoint": {
+          "x": 1,
+          "y": 1
+        },
+        "textHeight": 2
+      },
+      {
+        "type": "UNKNOWN_ELECTRICAL_OBJECT",
+        "handle": "bad"
+      },
+      {
+        "type": "LINE",
+        "isInPaperSpace": true,
+        "startPoint": {
+          "x": 0,
+          "y": 0
+        },
+        "endPoint": {
+          "x": 1000,
+          "y": 1000
+        }
+      }
+    ]
+  }
+}
