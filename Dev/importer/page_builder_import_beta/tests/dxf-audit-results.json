@@ -1,0 +1,50 @@
+[
+  {
+    "file": "fixture-export.dxf",
+    "audit_errors": 0,
+    "audit_fixes": 0,
+    "entity_counts": {
+      "LINE": 7,
+      "CIRCLE": 2,
+      "TEXT": 5,
+      "ARC": 2,
+      "LWPOLYLINE": 1,
+      "HATCH": 2
+    },
+    "layouts": [
+      "Model",
+      "Page-1"
+    ]
+  },
+  {
+    "file": "dxf-import-export.dxf",
+    "audit_errors": 0,
+    "audit_fixes": 0,
+    "entity_counts": {
+      "LINE": 67,
+      "TEXT": 28,
+      "CIRCLE": 1
+    },
+    "layouts": [
+      "Model",
+      "Page-1"
+    ]
+  },
+  {
+    "file": "browser-export.dxf",
+    "audit_errors": 0,
+    "audit_fixes": 0,
+    "entity_counts": {
+      "LINE": 7,
+      "CIRCLE": 2,
+      "TEXT": 5,
+      "ARC": 2,
+      "LWPOLYLINE": 1,
+      "HATCH": 2
+    },
+    "layouts": [
+      "Model",
+      "Page-1"
+    ]
+  }
+]

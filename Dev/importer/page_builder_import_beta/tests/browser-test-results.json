@@ -1,0 +1,20 @@
+{
+  "passed": [
+    "Editor boots offline with the user portrait default and custom template",
+    "Existing click-click line drawing: exactly 100 mm",
+    "Undo and redo retained",
+    "Existing circle and text drawing retained",
+    "Add page retained",
+    "Real ASCII DXF file decodes and previews without replacing the open project",
+    "Cancelling import preserves the open project",
+    "Typed decoder fixture imports arcs, fills, text and blocks as editable objects",
+    "Imported geometry exports to DXF through the actual download button",
+    "Imported attribute text is selectable and editable",
+    "Invalid DWG header rejected without replacing project",
+    "Blocked decoder download reports failure and preserves project; DWG binary NOT decoded",
+    "DWG worker/module protocol works with MOCKED decoder (not a binary-decoder test)",
+    "No JavaScript runtime errors in tested UI paths"
+  ],
+  "actual_dwg_decoding_tested": false,
+  "runtime_errors": []
+}

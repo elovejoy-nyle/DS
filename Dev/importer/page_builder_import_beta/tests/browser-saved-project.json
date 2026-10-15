@@ -1,0 +1,677 @@
+{
+  "format": "DraftSightPageBuilder",
+  "version": 3,
+  "units": "mm",
+  "coordinateSystem": "cad-y-up",
+  "paper": {
+    "preset": "custom",
+    "orientation": "landscape",
+    "width": 161.5,
+    "height": 113
+  },
+  "gap": 10,
+  "margin": 0,
+  "titleBlock": {
+    "enabled": false,
+    "width": 145,
+    "height": 40,
+    "entities": [
+      {
+        "id": "e_tj8jxlbjmv9zxd6o",
+        "type": "rect",
+        "x1": 0,
+        "y1": 0,
+        "x2": 145,
+        "y2": 40
+      },
+      {
+        "id": "e_4ulu07ngmv9zxd6o",
+        "type": "line",
+        "x1": 0,
+        "y1": 28,
+        "x2": 145,
+        "y2": 28
+      },
+      {
+        "id": "e_z36fnmkemv9zxd6o",
+        "type": "line",
+        "x1": 0,
+        "y1": 15.5,
+        "x2": 145,
+        "y2": 15.5
+      },
+      {
+        "id": "e_o7688ygbmv9zxd6o",
+        "type": "line",
+        "x1": 0,
+        "y1": 8,
+        "x2": 145,
+        "y2": 8
+      },
+      {
+        "id": "e_zc73gusxmv9zxd6o",
+        "type": "line",
+        "x1": 55,
+        "y1": 0,
+        "x2": 55,
+        "y2": 40
+      },
+      {
+        "id": "e_4e0jt9kbmv9zxd6o",
+        "type": "line",
+        "x1": 120,
+        "y1": 8,
+        "x2": 120,
+        "y2": 15.5
+      },
+      {
+        "id": "e_qbs2bs5ymv9zxd6o",
+        "type": "line",
+        "x1": 110,
+        "y1": 0,
+        "x2": 110,
+        "y2": 8
+      },
+      {
+        "id": "e_qbka5kjkmv9zxd6o",
+        "type": "text",
+        "x": 1.5,
+        "y": 37.5,
+        "h": 1.8,
+        "text": "PRODUCTION START DATE",
+        "angle": 0,
+        "widthFactor": 1,
+        "halign": 0,
+        "valign": 0
+      },
+      {
+        "id": "e_4tpsllfzmv9zxd6o",
+        "type": "text",
+        "x": 2,
+        "y": 31.5,
+        "h": 3,
+        "text": "{PRODUCTION_START_DATE}",
+        "angle": 0,
+        "widthFactor": 1,
+        "halign": 0,
+        "valign": 0
+      },
+      {
+        "id": "e_x1oavmo7mv9zxd6o",
+        "type": "text",
+        "x": 56.5,
+        "y": 37.5,
+        "h": 1.8,
+        "text": "TITLE",
+        "angle": 0,
+        "widthFactor": 1,
+        "halign": 0,
+        "valign": 0
+      },
+      {
+        "id": "e_xe3bnlarmv9zxd6o",
+        "type": "text",
+        "x": 78,
+        "y": 31.5,
+        "h": 4,
+        "text": "{TITLE}",
+        "angle": 0,
+        "widthFactor": 1,
+        "halign": 0,
+        "valign": 0
+      },
+      {
+        "id": "e_y9cusmqrmv9zxd6o",
+        "type": "text",
+        "x": 1.5,
+        "y": 25.5,
+        "h": 1.8,
+        "text": "PRODUCTION END DATE",
+        "angle": 0,
+        "widthFactor": 1,
+        "halign": 0,
+        "valign": 0
+      },
+      {
+        "id": "e_czjd2sezmv9zxd6o",
+        "type": "text",
+        "x": 2,
+        "y": 19,
+        "h": 3,
+        "text": "{PRODUCTION_END_DATE}",
+        "angle": 0,
+        "widthFactor": 1,
+        "halign": 0,
+        "valign": 0
+      },
+      {
+        "id": "e_v9zq5qajmv9zxd6o",
+        "type": "text",
+        "x": 56.5,
+        "y": 25.5,
+        "h": 1.8,
+        "text": "MODEL",
+        "angle": 0,
+        "widthFactor": 1,
+        "halign": 0,
+        "valign": 0
+      },
+      {
+        "id": "e_yuns2c83mv9zxd6o",
+        "type": "text",
+        "x": 74,
+        "y": 19,
+        "h": 4,
+        "text": "{MODEL}",
+        "angle": 0,
+        "widthFactor": 1,
+        "halign": 0,
+        "valign": 0
+      },
+      {
+        "id": "e_pjr7p5nymv9zxd6o",
+        "type": "text",
+        "x": 1.5,
+        "y": 13.1,
+        "h": 1.8,
+        "text": "DRAWN BY",
+        "angle": 0,
+        "widthFactor": 1,
+        "halign": 0,
+        "valign": 0
+      },
+      {
+        "id": "e_tskezk7wmv9zxd6o",
+        "type": "text",
+        "x": 2,
+        "y": 9.3,
+        "h": 2.8,
+        "text": "{DRAWN_BY}",
+        "angle": 0,
+        "widthFactor": 1,
+        "halign": 0,
+        "valign": 0
+      },
+      {
+        "id": "e_1kv33x8vmv9zxd6o",
+        "type": "text",
+        "x": 56.5,
+        "y": 13.1,
+        "h": 1.8,
+        "text": "DWG NUMBER",
+        "angle": 0,
+        "widthFactor": 1,
+        "halign": 0,
+        "valign": 0
+      },
+      {
+        "id": "e_o2ap7gvgmv9zxd6o",
+        "type": "text",
+        "x": 84,
+        "y": 9.3,
+        "h": 2.8,
+        "text": "{DRAWING_NUMBER}",
+        "angle": 0,
+        "widthFactor": 1,
+        "halign": 0,
+        "valign": 0
+      },
+      {
+        "id": "e_eim32ovqmv9zxd6o",
+        "type": "text",
+        "x": 121.5,
+        "y": 13.1,
+        "h": 1.8,
+        "text": "REV",
+        "angle": 0,
+        "widthFactor": 1,
+        "halign": 0,
+        "valign": 0
+      },
+      {
+        "id": "e_zjqez129mv9zxd6o",
+        "type": "text",
+        "x": 130,
+        "y": 9.3,
+        "h": 2.8,
+        "text": "{REVISION}",
+        "angle": 0,
+        "widthFactor": 1,
+        "halign": 0,
+        "valign": 0
+      },
+      {
+        "id": "e_1rzs8yopmv9zxd6o",
+        "type": "text",
+        "x": 1.5,
+        "y": 5.6,
+        "h": 1.8,
+        "text": "CHECKED",
+        "angle": 0,
+        "widthFactor": 1,
+        "halign": 0,
+        "valign": 0
+      },
+      {
+        "id": "e_tzxy12homv9zxd6o",
+        "type": "text",
+        "x": 2,
+        "y": 1.6,
+        "h": 2.8,
+        "text": "{CHECKED}",
+        "angle": 0,
+        "widthFactor": 1,
+        "halign": 0,
+        "valign": 0
+      },
+      {
+        "id": "e_i5hfylj9mv9zxd6o",
+        "type": "text",
+        "x": 56.5,
+        "y": 5.6,
+        "h": 1.8,
+        "text": "SCALE",
+        "angle": 0,
+        "widthFactor": 1,
+        "halign": 0,
+        "valign": 0
+      },
+      {
+        "id": "e_a8erse18mv9zxd6o",
+        "type": "text",
+        "x": 77,
+        "y": 1.6,
+        "h": 3,
+        "text": "{SCALE}",
+        "angle": 0,
+        "widthFactor": 1,
+        "halign": 0,
+        "valign": 0
+      },
+      {
+        "id": "e_twy10f1dmv9zxd6o",
+        "type": "text",
+        "x": 111.5,
+        "y": 5.6,
+        "h": 1.8,
+        "text": "SHEET",
+        "angle": 0,
+        "widthFactor": 1,
+        "halign": 0,
+        "valign": 0
+      },
+      {
+        "id": "e_nkdaefe7mv9zxd6o",
+        "type": "text",
+        "x": 118,
+        "y": 1.6,
+        "h": 3,
+        "text": "{PAGE} OF {PAGECOUNT}",
+        "angle": 0,
+        "widthFactor": 1,
+        "halign": 0,
+        "valign": 0
+      }
+    ]
+  },
+  "pages": [
+    {
+      "id": "e_kdrrv91nmv9zxd6o",
+      "title": "fixture-decoder-database",
+      "number": "",
+      "revision": "",
+      "productionStartDate": "",
+      "productionEndDate": "",
+      "model": "",
+      "drawnBy": "",
+      "checked": "",
+      "scale": "NTS",
+      "frame": false,
+      "entities": [
+        {
+          "id": "e_g7bbkkd1mv9zxd6o",
+          "type": "line",
+          "x1": 10,
+          "y1": 10,
+          "x2": 110,
+          "y2": 10,
+          "layer": "WIRE",
+          "sourceType": "LINE",
+          "sourceHandle": "10",
+          "literal": true,
+          "colorIndex": 1
+        },
+        {
+          "id": "e_hake27rcmv9zxd6o",
+          "type": "line",
+          "x1": 50,
+          "y1": 50,
+          "x2": 50,
+          "y2": 70,
+          "layer": "WIRE",
+          "sourceType": "LINE",
+          "sourceHandle": "",
+          "literal": true,
+          "colorIndex": 1
+        },
+        {
+          "id": "e_vxpoqox2mv9zxd6o",
+          "type": "circle",
+          "x": 40,
+          "y": 60,
+          "r": 4,
+          "layer": "WIRE",
+          "sourceType": "CIRCLE",
+          "sourceHandle": "",
+          "literal": true,
+          "colorIndex": 1
+        },
+        {
+          "id": "e_mva6iw6vmv9zxd6o",
+          "type": "text",
+          "x": 60,
+          "y": 70,
+          "h": 2.5,
+          "text": "K1",
+          "angle": 0,
+          "widthFactor": 1,
+          "halign": 0,
+          "valign": 0,
+          "layer": "WIRE",
+          "sourceType": "ATTRIB",
+          "sourceHandle": "12",
+          "literal": true,
+          "colorIndex": 1
+        },
+        {
+          "id": "e_73f7f80zmv9zxd6o",
+          "type": "line",
+          "x1": 80,
+          "y1": 20,
+          "x2": 90,
+          "y2": 20,
+          "layer": "WIRE",
+          "sourceType": "LINE",
+          "sourceHandle": "",
+          "literal": true,
+          "colorIndex": 1
+        },
+        {
+          "id": "e_3wvcfptmmv9zxd6o",
+          "type": "circle",
+          "x": 85,
+          "y": 25,
+          "r": 2,
+          "layer": "WIRE",
+          "sourceType": "CIRCLE",
+          "sourceHandle": "",
+          "literal": true,
+          "colorIndex": 1
+        },
+        {
+          "id": "e_3vz8f6klmv9zxd6o",
+          "type": "arc",
+          "x": 110,
+          "y": 60,
+          "r": 10,
+          "start": 0,
+          "end": 180,
+          "layer": "0",
+          "sourceType": "ARC",
+          "sourceHandle": "",
+          "literal": true,
+          "colorIndex": 7
+        },
+        {
+          "id": "e_q7lmfduimv9zxd6o",
+          "type": "path",
+          "points": [
+            {
+              "x": 20,
+              "y": 20
+            },
+            {
+              "x": 30,
+              "y": 20
+            },
+            {
+              "x": 30,
+              "y": 30
+            },
+            {
+              "x": 20,
+              "y": 30
+            }
+          ],
+          "closed": true,
+          "layer": "0",
+          "sourceType": "LWPOLYLINE",
+          "sourceHandle": "",
+          "literal": true,
+          "colorIndex": 7
+        },
+        {
+          "id": "e_3a63mi54mv9zxd6o",
+          "type": "arc",
+          "x": 40,
+          "y": 80,
+          "r": 10,
+          "start": 180,
+          "end": 0,
+          "layer": "0",
+          "sourceType": "LWPOLYLINE",
+          "sourceHandle": "",
+          "literal": true,
+          "colorIndex": 7
+        },
+        {
+          "id": "e_du0zd5fqmv9zxd6o",
+          "type": "text",
+          "x": 150,
+          "y": 40,
+          "h": 3,
+          "text": "ROTATED",
+          "angle": 90,
+          "widthFactor": 0.8,
+          "halign": 1,
+          "valign": 2,
+          "layer": "0",
+          "sourceType": "TEXT",
+          "sourceHandle": "",
+          "literal": true,
+          "colorIndex": 7
+        },
+        {
+          "id": "e_i1uxrdremv9zxd6o",
+          "type": "text",
+          "x": 20,
+          "y": 100,
+          "h": 3,
+          "text": "Literal {PAGE}",
+          "angle": 0,
+          "widthFactor": 1,
+          "halign": 0,
+          "valign": 0,
+          "layer": "0",
+          "sourceType": "TEXT",
+          "sourceHandle": "",
+          "literal": true,
+          "colorIndex": 7
+        },
+        {
+          "id": "e_t3feiln4mv9zxd6o",
+          "type": "text",
+          "x": 90,
+          "y": 92,
+          "h": 3,
+          "text": "first",
+          "angle": 0,
+          "widthFactor": 1,
+          "halign": 0,
+          "valign": 0,
+          "layer": "0",
+          "sourceType": "MTEXT",
+          "sourceHandle": "",
+          "literal": true,
+          "colorIndex": 7
+        },
+        {
+          "id": "e_q6l2e75umv9zxd6o",
+          "type": "text",
+          "x": 90,
+          "y": 86.999,
+          "h": 3,
+          "text": "second",
+          "angle": 0,
+          "widthFactor": 1,
+          "halign": 0,
+          "valign": 0,
+          "layer": "0",
+          "sourceType": "MTEXT",
+          "sourceHandle": "",
+          "literal": true,
+          "colorIndex": 7
+        },
+        {
+          "id": "e_fpr5ol14mv9zxd6o",
+          "type": "fill",
+          "loops": [
+            [
+              {
+                "x": 15,
+                "y": 50
+              },
+              {
+                "x": 25,
+                "y": 50
+              },
+              {
+                "x": 25,
+                "y": 60
+              },
+              {
+                "x": 15,
+                "y": 60
+              }
+            ]
+          ],
+          "layer": "0",
+          "sourceType": "SOLID",
+          "sourceHandle": "",
+          "literal": true,
+          "colorIndex": 7
+        },
+        {
+          "id": "e_aaiyxzi3mv9zxd6o",
+          "type": "fill",
+          "loops": [
+            [
+              {
+                "x": 30,
+                "y": 50
+              },
+              {
+                "x": 40,
+                "y": 50
+              },
+              {
+                "x": 40,
+                "y": 60
+              },
+              {
+                "x": 30,
+                "y": 60
+              }
+            ]
+          ],
+          "layer": "0",
+          "sourceType": "HATCH",
+          "sourceHandle": "",
+          "literal": true,
+          "colorIndex": 7
+        }
+      ]
+    }
+  ],
+  "importInfo": {
+    "sourceName": "fixture-decoder-database.json",
+    "sourceEntityTypes": {
+      "LINE": 2,
+      "INSERT": 2,
+      "ARC": 1,
+      "LWPOLYLINE": 2,
+      "TEXT": 3,
+      "MTEXT": 1,
+      "SOLID": 1,
+      "HATCH": 1,
+      "UNKNOWN_ELECTRICAL_OBJECT": 1
+    },
+    "expandedEntityTypes": {
+      "LINE": 3,
+      "INSERT": 3,
+      "CIRCLE": 2,
+      "ATTRIB": 1,
+      "ARC": 1,
+      "LWPOLYLINE": 2,
+      "TEXT": 3,
+      "MTEXT": 1,
+      "SOLID": 1,
+      "HATCH": 1,
+      "UNKNOWN_ELECTRICAL_OBJECT": 1
+    },
+    "skipped": {
+      "Entities on off/frozen layers": 1,
+      "Unsupported UNKNOWN_ELECTRICAL_OBJECT": 1,
+      "Paper-space entities (Model import only)": 1
+    },
+    "approximated": {
+      "Block references expanded to editable geometry": 3,
+      "Bulged polylines split into editable lines/arcs": 1,
+      "MTEXT formatting/wrapping simplified to editable text lines": 1
+    },
+    "notes": [
+      "This first importer brings the entire Model into one editing canvas. Original relative positions are retained; existing Sheet tabs/viewports are not reconstructed.",
+      "Existing title-block lettering is imported as literal editable text, not automatically bound to page variables.",
+      "Fonts are substituted with Arial in the browser and Standard in DXF. Verify text fit. Original line patterns/weights are not fully reproduced.",
+      "Review all skipped items before using this import as a complete drawing."
+    ],
+    "decoderStats": {},
+    "decodedModelEntities": 13,
+    "examples": [
+      {
+        "type": "TEXT",
+        "reason": "Entities on off/frozen layers"
+      },
+      {
+        "type": "UNKNOWN_ELECTRICAL_OBJECT",
+        "handle": "bad",
+        "reason": "Unsupported UNKNOWN_ELECTRICAL_OBJECT"
+      }
+    ],
+    "unitCode": 4,
+    "unitName": "millimetres",
+    "suggestedScale": 1,
+    "layoutNames": [
+      "Model",
+      "CONTROL POWER",
+      "ANALOG + COMS"
+    ],
+    "importedObjects": 15,
+    "decoder": "Previously decoded DWG database",
+    "mmPerSourceUnit": 1,
+    "sourceOrigin": {
+      "x": 0,
+      "y": 0
+    },
+    "translationMm": {
+      "x": 10,
+      "y": 10
+    },
+    "modelBoundsSourceUnits": {
+      "x": 0,
+      "y": 0,
+      "w": 141.5,
+      "h": 93
+    }
+  }
+}
