@@ -115,24 +115,7 @@
   const text = x => String(x == null ? '' : x).replace(/[\r\n\t]/g, ' ').slice(0, 250);
   const presets = {letter:[215.9,279.4], legal:[215.9,355.6], a4:[210,297]};
   function entity(type, props) { return Object.assign({id:uid(), type}, props); }
-/*
-  function defaults() {
-    return [
-      entity('rect',{x1:0,y1:0,x2:145,y2:40}),
-      entity('line',{x1:0,y1:20,x2:145,y2:20}),
-      entity('line',{x1:0,y1:10,x2:145,y2:10}),
-      entity('line',{x1:85,y1:0,x2:85,y2:20}),
-      entity('text',{x:3,y:34,h:2,text:'DRAWING TITLE'}),
-      entity('text',{x:3,y:25,h:3.5,text:'{TITLE}'}),
-      entity('text',{x:3,y:16,h:1.8,text:'DRAWING NUMBER'}),
-      entity('text',{x:3,y:12,h:2.5,text:'{DRAWING_NUMBER}'}),
-      entity('text',{x:88,y:16,h:1.8,text:'REVISION'}),
-      entity('text',{x:88,y:12,h:2.5,text:'{REVISION}'}),
-      entity('text',{x:3,y:3.5,h:2.5,text:'SCALE: AS SHOWN'}),
-      entity('text',{x:88,y:3.5,h:2.5,text:'Sheet {PAGE} of {PAGECOUNT}'})
-    ];
-  }
-*/
+
 // Match our existing template as defualt.
 function defaults() {
   return [
@@ -348,12 +331,7 @@ function defaults() {
 			: match
 	  );
 	}
-/*
-  function vars(s,page,index,total) {
-    const values={TITLE:page.title,DRAWING_NUMBER:page.number,REVISION:page.revision,PAGE:index+1,PAGECOUNT:total};
-    return text(s).replace(/\{(TITLE|DRAWING_NUMBER|REVISION|PAGE|PAGECOUNT)\}/g,(_,key)=>String(values[key]));
-  }
-*/  
+ 
   function origin(p,index) { return {x:num(index*(p.paper.width+p.gap)),y:0}; }
   function moved(e,dx,dy) {
     const r=clone(e);
